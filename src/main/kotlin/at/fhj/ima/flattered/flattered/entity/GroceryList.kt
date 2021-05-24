@@ -6,20 +6,20 @@ import javax.persistence.GenerationType
 import javax.persistence.Id
 
 @Entity
-class groceryList (
+class GroceryList (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int? = null,
     var name: String? = null
-): Comparable<groceryList>{
-    override fun compareTo(other: groceryList): Int {
+): Comparable<GroceryList>{
+    override fun compareTo(other: GroceryList): Int {
         return compareValues(id, other.id)
     }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
-        other as groceryList
+        other as GroceryList
         if (id != other.id) return false
         return true
     }

@@ -2,6 +2,7 @@ package at.fhj.ima.flattered.flattered.entity
 
 
 import org.jetbrains.annotations.NotNull
+import java.io.Serializable
 import javax.persistence.*
 
 
@@ -21,11 +22,9 @@ class groceryItem(
     //@field:NotNull
     var requestedBy: String? = null,
     var comment: String? = null,
-    //@field:NotNull
-    @ManyToOne
-    var groceryList: groceryList? = null
-
-){
+    @ManyToOne @field:NotNull
+    var groceryList: GroceryList? = null
+): Comparable<groceryItem>, Serializable {
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -37,5 +36,9 @@ class groceryItem(
 
     override fun hashCode(): Int {
         return id.hashCode()
+    }
+
+    override fun compareTo(other: groceryItem): Int {
+        return compareValues(id, other.id)
     }
 }

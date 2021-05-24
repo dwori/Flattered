@@ -15,20 +15,18 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix="bootstrap" tagdir="/WEB-INF/tags/bootstrap" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="layout" tagdir="/WEB-INF/tags/layout" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-    <%--<bootstrap:bootstrap-metadata/>--%>
-    <title>Employees</title>
-    <%--<bootstrap:bootstrap-css/>--%>
-</head>
-<body>
+
+<layout:page-container title="Groceries" activePage="editGroceryItem">
 <div class="container" role="main">
 
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <form method="post" action="changeGroceryItem">
+            <form:form modelAttribute="groceryItem" method="post" action="changeGroceryItem">
+
+
                 <fieldset>
                     <legend>Change Grocery item number ${groceryItem.id}</legend>
 
@@ -54,10 +52,14 @@
                     </div>
 
                     <! ---------------- List ---------------- -->
+
+
                     <div class="mb-3">
-                        <label for="inputGrocerylist" class="form-label">List</label>
-                        <input class="form-control" id="inputGrocerylist" type="number" name="List"
-                               value="<c:out value="${groceryItem.amount}"/>">
+                        <div class="mb-3">
+                            <label for="inputGrocerylist" class="form-label">List</label>
+                            <input class="form-control" id="inputGrocerylist" type="number" name="List"
+                                   value="<c:out value="${groceryItem.amount}"/>">
+                        </div>
                     </div>
 
                     <! ---------------- requestedBY ---------------- -->
@@ -74,7 +76,7 @@
                     </div>
 
                 </fieldset>
-            </form>
+            </form:form>
         </div>
     </div>
 
@@ -82,3 +84,4 @@
 <%--<bootstrap:bootstrap-js/>--%>
 </body>
 </html>
+</layout:page-container>
