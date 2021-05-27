@@ -1,13 +1,10 @@
 package at.fhj.ima.flattered.flattered.controller
 
 import at.fhj.ima.flattered.flattered.entity.groceryItem
-import at.fhj.ima.flattered.flattered.repository.groceryListRepository
 import at.fhj.ima.flattered.flattered.repository.groceryItemRepository
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.ui.set
-import org.springframework.validation.BindingResult
-import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
@@ -71,5 +68,11 @@ class GroceryController(val groceryItemRepository: groceryItemRepository) {
         groceryItemRepository.save(groceryItem)
 
         return listGrocery(model)
+    }
+
+    @RequestMapping("/dashboard", method = [RequestMethod.GET])
+    fun dashboard(model: Model): String{
+        model.set("groceryList", groceryItemRepository.findAll())
+        return "dashboard"
     }
 }

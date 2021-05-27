@@ -54,6 +54,7 @@
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
             <p>
+                <a href="/dashboard" class="btn btn-primary">Dashboard</a>
                 <a href="/editGroceryItem" class="btn btn-success">Add new Item</a>
             </p>
         </div>
