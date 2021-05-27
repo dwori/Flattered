@@ -25,10 +25,11 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <form:form modelAttribute="groceryItem" method="post" action="changeGroceryItem">
-
+                <form:hidden path="id" />
 
                 <fieldset>
                     <legend>Change Grocery item number ${groceryItem.id}</legend>
+
 
                     <! ---------------- name ---------------- -->
                     <div class="mb-3">

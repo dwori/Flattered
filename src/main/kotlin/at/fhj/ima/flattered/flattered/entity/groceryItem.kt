@@ -13,11 +13,11 @@ class groceryItem(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int? = null,
     @Column(nullable = false, unique = true)
-    //@field:NotNull
+    @field:NotNull
     var name: String? = null,
-    //@field:NotNull
+    @field:NotNull
     var done: Boolean = false,
-    //@field:NotNull
+    @field:NotNull
     var amount: Int? = null,
     //@field:NotNull
     var requestedBy: String? = null,

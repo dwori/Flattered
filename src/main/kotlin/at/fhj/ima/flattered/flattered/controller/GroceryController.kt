@@ -39,7 +39,9 @@ class GroceryController(val groceryItemRepository: groceryItemRepository) {
     @RequestMapping("/changeGroceryItem", method = [RequestMethod.POST])
     fun changeGroceryItem(@ModelAttribute groceryItem: groceryItem): String {
         groceryItemRepository.save(groceryItem);
-        return "redirect:/editGroceryItem?id=" + groceryItem.id
+        //return "redirect:/editGroceryItem?id=" + groceryItem.id
+        //go back to the entire list
+        return "redirect:/listGrocery"
     }
 
     @RequestMapping("/listGrocery", method = [RequestMethod.GET])
