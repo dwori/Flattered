@@ -51,7 +51,7 @@ class GroceryController(val groceryItemRepository: groceryItemRepository) {
     fun deleteGroceryItem(model: Model, @RequestParam id: Int): String{
         val groceryItem = groceryItemRepository.findById(id).get()
         groceryItemRepository.delete(groceryItem);
-        model["message"] = "GroceryItem: ${groceryItem.name} has been deleted!"
+        model["errorMessage"] = "GroceryItem: ${groceryItem.name} has been deleted!"
         return listGrocery(model)
     }
 
@@ -67,8 +67,8 @@ class GroceryController(val groceryItemRepository: groceryItemRepository) {
         }
         groceryItemRepository.save(groceryItem)
 
-        listGrocery(model)
-        return "redirect:/listGrocery"
+        //return "redirect:/listGrocery" TODO: Redirect to listGrocery + have messages show up
+        return listGrocery(model) //todo with this version messages show up
     }
 
     @RequestMapping("/dashboard", method = [RequestMethod.GET])
