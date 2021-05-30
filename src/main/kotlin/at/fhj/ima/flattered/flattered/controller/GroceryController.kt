@@ -60,14 +60,15 @@ class GroceryController(val groceryItemRepository: groceryItemRepository) {
         val groceryItem = groceryItemRepository.findById(id).get()
         if (groceryItem.done){
             groceryItem.done = false
-            model["message"] = "${groceryItem.name} has been unchecked!"
+            model["errorMessage"] = "[ ${groceryItem.name} ] has been unchecked!"
         }else{
             groceryItem.done = true
-            model["message"] = "${groceryItem.name} has been marked as checked!"
+            model["message"] = "[ ${groceryItem.name} ] has been marked as checked!"
         }
         groceryItemRepository.save(groceryItem)
 
-        return listGrocery(model)
+        listGrocery(model)
+        return "redirect:/listGrocery"
     }
 
     @RequestMapping("/dashboard", method = [RequestMethod.GET])
