@@ -1,13 +1,10 @@
 package at.fhj.ima.flattered.flattered.controller
 
 import at.fhj.ima.flattered.flattered.entity.groceryItem
-import at.fhj.ima.flattered.flattered.repository.groceryListRepository
 import at.fhj.ima.flattered.flattered.repository.groceryItemRepository
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.ui.set
-import org.springframework.validation.BindingResult
-import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
@@ -54,7 +51,7 @@ class GroceryController(val groceryItemRepository: groceryItemRepository) {
     fun deleteGroceryItem(model: Model, @RequestParam id: Int): String{
         val groceryItem = groceryItemRepository.findById(id).get()
         groceryItemRepository.delete(groceryItem);
-        model["message"] = "GroceryItem: ${groceryItem.name} has been deleted!"
+        model["errorMessage"] = "GroceryItem: ${groceryItem.name} has been deleted!"
         return listGrocery(model)
     }
 
@@ -63,13 +60,20 @@ class GroceryController(val groceryItemRepository: groceryItemRepository) {
         val groceryItem = groceryItemRepository.findById(id).get()
         if (groceryItem.done){
             groceryItem.done = false
-            model["message"] = "${groceryItem.name} has been unchecked!"
+            model["errorMessage"] = "[ ${groceryItem.name} ] has been unchecked!"
         }else{
             groceryItem.done = true
-            model["message"] = "${groceryItem.name} has been marked as checked!"
+            model["message"] = "[ ${groceryItem.name} ] has been marked as checked!"
         }
         groceryItemRepository.save(groceryItem)
 
-        return listGrocery(model)
+        //return "redirect:/listGrocery" TODO: Redirect to listGrocery + have messages show up
+        return listGrocery(model) //todo with this version messages show up
+    }
+
+    @RequestMapping("/dashboard", method = [RequestMethod.GET])
+    fun dashboard(model: Model): String{
+        model.set("groceryList", groceryItemRepository.findAll())
+        return "dashboard"
     }
 }

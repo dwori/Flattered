@@ -19,47 +19,64 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<layout:page-container title="Groceries" activePage="editGroceryItem">
+<layout:sidebar title="Manage Groceries" activePage="editGroceryItem">
 <div class="container" role="main">
-
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <form:form modelAttribute="groceryItem" method="post" action="changeGroceryItem">
                 <form:hidden path="id" />
-
                 <fieldset>
-                    <legend>Change Grocery item number ${groceryItem.id}</legend>
+                    <legend>
+                        <c:choose>
+                            <c:when test="${groceryItem.id == null}">
+                                Create new Grocery Item
+                            </c:when>
+                            <c:otherwise>
+                                Edit Grocery item #${groceryItem.id} - ${groceryItem.name}
+                            </c:otherwise>
+                        </c:choose>
+                    </legend>
 
 
                     <! ---------------- name ---------------- -->
                     <div class="mb-3">
                         <label for="inputName" class="form-label">Name</label>
-                        <input class="form-control" id="inputName" type="text" name="name"
-                               value="<c:out value="${groceryItem.name}"/>">
+                        <c:set var="nameInvalid"><form:errors path="name" cssClass="invalid-feedback"/></c:set>
+                        <form:input path="name" class="form-control ${not empty nameInvalid ? 'is-invalid' : ''}" id="inputName" type="text" name="name"/>
+                            ${nameInvalid}
                     </div>
 
                     <! ---------------- amount ---------------- -->
                     <div class="mb-3">
                         <label for="inputAmount" class="form-label">Amount</label>
-                        <input class="form-control" id="inputAmount" type="number" name="amount"
-                               value="<c:out value="${groceryItem.amount}"/>">
+                        <c:set var="amountInvalid"><form:errors path="amount" cssClass="invalid-feedback"/></c:set>
+                        <form:input path="amount" class="form-control ${not empty amountInvalid ? 'is-invalid' : ''}" id="inputAmount" type="number" name="amount"/>
+                            ${amountInvalid}
                     </div>
 
                     <! ---------------- comment ---------------- -->
                     <div class="mb-3">
                         <label for="inputComment" class="form-label">Comment</label>
-                        <input class="form-control" id="inputComment" type="text" name="comment"
-                               value="<c:out value="${groceryItem.comment}"/>">
+                        <c:set var="commentInvalid"><form:errors path="comment" cssClass="invalid-feedback"/></c:set>
+                        <form:input path="comment" class="form-control ${not empty commentInvalid ? 'is-invalid' : ''}" id="inputComment" type="text" name="name"/>
+                            ${commentInvalid}
+
+                    </div>
+
+                    <! ---------------- isChecked? ---------------- -->
+                    <div class="mb-3">
+                        <label for="inputDone" class="form-label">Done?</label>
+                        <input class="form-control" id="inputDone" type="text" readonly="readonly" name="done"
+                               value="<c:out value="${groceryItem.done}"/>">
                     </div>
 
                     <! ---------------- List ---------------- -->
-
-
+                    <!-- TODO: Verknüpfung von grocery list Ansicht mit Flat-->
                     <div class="mb-3">
                         <div class="mb-3">
                             <label for="inputGrocerylist" class="form-label">List</label>
                             <input class="form-control" id="inputGrocerylist" type="number" name="List"
-                                   value="<c:out value="${groceryItem.amount}"/>">
+                                   value="<c:out value="${groceryItem.groceryList.id}"/>">
                         </div>
                     </div>
 
@@ -85,4 +102,4 @@
 <%--<bootstrap:bootstrap-js/>--%>
 </body>
 </html>
-</layout:page-container>
+</layout:sidebar>

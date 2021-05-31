@@ -14,6 +14,10 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix="bootstrap" tagdir="/WEB-INF/tags/bootstrap" %>
+<%@taglib prefix="layout" tagdir="/WEB-INF/tags/layout" %>
+
+<layout:sidebar title="Grocery List" activePage="listGrocery">
+
 
 <html>
 <head>
@@ -50,19 +54,20 @@
 
     <!--  Messages  ----------------------------------------------------------- -->
 
-    <!--  2 simple buttons ----------------------------------------------------------- -->
+    <!--  2 simple buttons -----------------------------------------------------------
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
             <p>
+                <a href="/dashboard" class="btn btn-primary">Dashboard</a>
                 <a href="/editGroceryItem" class="btn btn-success">Add new Item</a>
             </p>
         </div>
     </div>
-    <!--  2 simple buttons ----------------------------------------------------------- -->
+     2 simple buttons ----------------------------------------------------------- -->
 
 
     <div class="row">
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-20 col-md-offset-1">
 
             <table data-toggle="table" class="table table table-striped">
                 <thead>
@@ -70,6 +75,7 @@
                     <th data-sortable="true">Name</th>
                     <th data-sortable="false">Amount</th>
                     <th data-sortable="true">Requested By</th>
+                    <th data-sortable="false">Comments</th>
                     <th data-sortable="true">State</th>
                     <th>Actions</th>
                 </tr>
@@ -81,6 +87,7 @@
                         <td>${groceryItem.name}</td>
                         <td>${groceryItem.amount}</td>
                         <td>${groceryItem.requestedBy}</td>
+                        <td>${groceryItem.comment}</td>
                         <td>
                             <c:choose>
                                 <c:when test="${groceryItem.done}">
@@ -96,7 +103,6 @@
                                     </svg>
                                 </c:otherwise>
                             </c:choose>
-
                         </td>
                         <td>
                             <a href="editGroceryItem?id=${groceryItem.id}" class="btn btn-xs btn-success">Edit</a>
@@ -119,3 +125,4 @@
 </body>
 </html>
 
+</layout:sidebar>
