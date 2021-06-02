@@ -23,7 +23,7 @@ class groceryItem(
     var requestedBy: String? = null,
     var comment: String? = null,
     @ManyToOne @field:NotNull
-    var groceryList: GroceryList? = null
+    var flat: flat? = null
 ): Comparable<groceryItem>, Serializable {
 
     override fun equals(other: Any?): Boolean {

@@ -67,20 +67,16 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th scope="col">Users</th>
+                            <th>Username</th>
+                            <th>Actions</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr>
-                            <td>Max</td>
-                        </tr>
-                        <tr>
-                            <td>Peter</td>
-                        </tr>
-                        <tr>
-                            <td>Lukas</td>
-                        </tr>
-                        </tbody>
+                        <c:forEach items="${flat.users}" var="user">
+                            <tr>
+                                <td>${user.username}</td>
+                                <td><a href="#" class="btn btn-danger" type="btn">Kick User</a></td>
+                            </tr>
+                        </c:forEach>
                     </table>
                     <div class="d-grid gap-2 d-md-block">
                         <a href="editFlat?id=${flat.id}" class="btn btn-success" type="btn">Edit</a>

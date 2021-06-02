@@ -4,6 +4,15 @@ import org.jetbrains.annotations.NotNull
 import java.io.Serializable
 import javax.persistence.*
 
+enum class userRole{
+    ROLE_USER,
+    ROLE_ADMIN
+}
+enum class flatRole{
+    FLAT_USER,
+    FLAT_ADMIN
+}
+
 @Entity
 class user(
     @Id
@@ -11,10 +20,15 @@ class user(
     var id: Int? = null,
     @Column(nullable = false, unique = true)
     @field:NotNull
-    var name: String? = null,
+    var username: String? = null,
+    var password: String,
     @ManyToMany
-    var flats: Set<flat>? = null
-): Comparable<user>, Serializable {
+    var flats: Set<flat>? = null,
+    @Enumerated(EnumType.STRING)
+    var userRole: userRole,
+    @Enumerated(EnumType.STRING)
+    var flatRole: flatRole
+): Comparable<user>{
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

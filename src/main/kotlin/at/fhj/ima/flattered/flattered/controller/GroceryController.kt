@@ -26,13 +26,6 @@ class GroceryController(val groceryItemRepository: groceryItemRepository) {
         return "editGroceryItem"
     }
 
-    fun populateEditGroceryView(model: Model): String {
-        //todo fix function
-        //model.set("groceryList", groceryListRepository.findAll())
-        return "editGroceryItem"
-    }
-
-    //todo
     @RequestMapping("/changeGroceryItem", method = [RequestMethod.POST])
     fun changeGroceryItem(@ModelAttribute groceryItem: groceryItem): String {
         groceryItemRepository.save(groceryItem);

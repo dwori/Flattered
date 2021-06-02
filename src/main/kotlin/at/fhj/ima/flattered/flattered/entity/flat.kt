@@ -17,7 +17,7 @@ class flat(
     var name: String? = null,
     @field:NotNull
     var address: String? = null,
-    @ManyToMany @field:NotNull
+    @ManyToMany
     var users: Set<user>? = null
 ): Comparable<flat>, Serializable {
 
