@@ -15,6 +15,10 @@ class flat(
     @Column(nullable = false, unique = true)
     @field:NotNull
     var name: String? = null,
+    @field:NotNull
+    var address: String? = null,
+    //@ManyToMany @field:NotNull
+    //var users<User>: User<User>? = null
 ): Comparable<flat>, Serializable {
 
     override fun equals(other: Any?): Boolean {
