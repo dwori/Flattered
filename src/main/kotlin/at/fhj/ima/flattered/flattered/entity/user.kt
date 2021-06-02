@@ -1,30 +1,25 @@
 package at.fhj.ima.flattered.flattered.entity
 
-
 import org.jetbrains.annotations.NotNull
 import java.io.Serializable
 import javax.persistence.*
 
-
-
 @Entity
-class flat(
+class user(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int? = null,
     @Column(nullable = false, unique = true)
     @field:NotNull
     var name: String? = null,
-    @field:NotNull
-    var address: String? = null,
-    @ManyToMany @field:NotNull
-    var users: Set<user>? = null
-): Comparable<flat>, Serializable {
+    @ManyToMany
+    var flats: Set<flat>? = null
+): Comparable<user>, Serializable {
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
-        other as flat
+        other as user
         if (id != other.id) return false
         return true
     }
@@ -33,7 +28,7 @@ class flat(
         return id.hashCode()
     }
 
-    override fun compareTo(other: flat): Int {
+    override fun compareTo(other: user): Int {
         return compareValues(id, other.id)
     }
 }
