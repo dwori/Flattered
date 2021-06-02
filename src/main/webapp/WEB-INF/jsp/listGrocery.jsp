@@ -16,6 +16,7 @@
 <%@taglib prefix="bootstrap" tagdir="/WEB-INF/tags/bootstrap" %>
 <%@taglib prefix="layout" tagdir="/WEB-INF/tags/layout" %>
 
+
 <layout:sidebar title="Grocery List" activePage="listGrocery">
 
 
@@ -28,8 +29,9 @@
 <body>
 <div class="container" role="main">
 
-    <div class="page-header">
+    <div class="page-header mb-4">
         <h1>Grocery Manager</h1>
+        <h5>Here you can add items that should be bought, the groceries get done.</h5>
     </div>
 
     <!--  Messages  ----------------------------------------------------------- -->
