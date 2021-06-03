@@ -18,12 +18,9 @@
 <%@taglib prefix = "sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 
 <!-- Refreshes side every 10 seconds-->
-<META HTTP-EQUIV="Refresh" CONTENT="10">
+<META HTTP-EQUIV="Refresh" CONTENT="30">
 <!DOCTYPE html>
 <layout:sidebar title="Dashboard" activePage="dashboard">
-    <head>
-        <div class="btn float-end btn-primary mx-4 my-4" href="#">Login</div>
-    </head>
 <h1 class="text-center">DASHBOARD</h1>
 <!-- TODO dashboard content -->
     <sql:setDataSource var = "groceryItems" driver = "com.mysql.cj.jdbc.Driver"

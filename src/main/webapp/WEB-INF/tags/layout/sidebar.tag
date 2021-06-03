@@ -8,10 +8,10 @@
 
 <%@ attribute name="title" required="true" %>
 <%@ attribute name="activePage" required="true" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix="bootstrap" tagdir="/WEB-INF/tags/bootstrap" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
 <!DOCTYPE html>
@@ -19,7 +19,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <a href="/logout" class="btn btn-danger float-end my-2 mx-2">Logout</a>
     <bootstrap:bootstrap-metadata/>
         <title>${title}</title>
     <bootstrap:bootstrap-css/>
@@ -34,7 +34,7 @@
         </svg>
     </a>
     <div class="container">
-        <a class="navbar-brand" href="/dashboard">Flattered</a>
+        <a class="navbar-brand" href="/">Flattered</a>
             <li>
                 <a class="dropdown-item" href="/dashboard">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-speedometer2" viewBox="0 0 16 16">
