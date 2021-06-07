@@ -8,10 +8,6 @@ enum class userRole{
     ROLE_USER,
     ROLE_ADMIN
 }
-enum class flatRole{
-    FLAT_USER,
-    FLAT_ADMIN
-}
 
 @Entity
 class user(
@@ -21,12 +17,12 @@ class user(
     @Column(nullable = false, unique = true)
     var username: String,
     var password: String,
-    @ManyToMany
+    @ManyToMany(mappedBy = "users")
     var flats: Set<flat>? = null,
     @Enumerated(EnumType.STRING)
     var userRole: userRole,
-    @Enumerated(EnumType.STRING)
-    var flatRole: flatRole
+    @ManyToMany(mappedBy = "admins")
+    var adminstratedFlats: Set<flat>? = null,
 ): Comparable<user>{
 
     override fun equals(other: Any?): Boolean {

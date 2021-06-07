@@ -3,19 +3,24 @@ package at.fhj.ima.flattered.flattered.controller
 import at.fhj.ima.flattered.flattered.entity.flat
 import at.fhj.ima.flattered.flattered.repository.flatRepository
 import at.fhj.ima.flattered.flattered.repository.groceryItemRepository
-import at.fhj.ima.flattered.flattered.repository.userRepository
+import at.fhj.ima.flattered.flattered.service.FlatService
+import at.fhj.ima.flattered.flattered.service.UserService
 import org.springframework.security.access.annotation.Secured
 import org.springframework.stereotype.Controller
+import org.springframework.transaction.annotation.Transactional
 import org.springframework.ui.Model
 import org.springframework.ui.set
 import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.servlet.mvc.support.RedirectAttributes
 
 
 @Controller
-class FlatController(val flatRepository: flatRepository, val groceryItemRepository: groceryItemRepository, val userRepository: userRepository) {
+class FlatController(val flatRepository: flatRepository, val groceryItemRepository: groceryItemRepository,
+                     val userService: UserService, val flatService: FlatService
+) {
 
     @RequestMapping("/editFlat", method = [RequestMethod.GET])
     fun editFlat(model: Model, @RequestParam(required = false) id: Int?): String {
@@ -28,11 +33,14 @@ class FlatController(val flatRepository: flatRepository, val groceryItemReposito
         }
         return "editFlat"
     }
-    @Secured("FLAT_ADMIN","ROLE_ADMIN")
+    @Secured("ROLE_USER")
     @RequestMapping("/changeFlat", method = [RequestMethod.POST])
     fun changeFlat(@ModelAttribute flat: flat): String {
-        flatRepository.save(flat);
-        //return "redirect:/editGroceryItem?id=" + groceryItem.id
+        val currentUser = userService.getCurrentUser()
+        flat.admins.add(currentUser) //adds the current user automatically to the new flat as admin and as user
+        flat.users.add(currentUser)
+        flatService.saveFlat(flat)
+
         //go back to the entire list
         return "redirect:/listFlat"
     }
@@ -42,20 +50,22 @@ class FlatController(val flatRepository: flatRepository, val groceryItemReposito
         model.set("flatList", flatRepository.findAll())
         return "listFlat"
     }
-    @Secured("ROLE_ADMIN")
+    @Transactional
+    @Secured("ROLE_USER")
     @RequestMapping("/deleteFlat", method = [RequestMethod.GET])
-    fun deleteFlat(model: Model, @RequestParam id: Int): String{
+    fun deleteFlat(model: Model, @RequestParam id: Int, redirectAttributes: RedirectAttributes): String{
         val flat = flatRepository.findById(id).get()
-        //flatRepository.deleteByFlat(id)
-        //flatRepository.deleteByFlat2(id)
+
         for (x in groceryItemRepository.findByFlat(id)){
             groceryItemRepository.delete(x)
+
         }
-        /*for (x in userRepository.findByFlat(id)){
-            //todo löschen von user_flats beziehungen
-        }*/
-        flatRepository.delete(flat);
-        model["errorMessage"] = "Flat: ${flat.name} has been deleted!"
-        return listFlat(model)
+
+        flatRepository.delete(flat)
+
+        val message = "Flat: ${flat.name} has been deleted!"
+        redirectAttributes.addFlashAttribute("errorMessage",message)
+
+        return "redirect:/listFlat"
     }
 }

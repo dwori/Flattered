@@ -3,6 +3,7 @@ package at.fhj.ima.flattered.flattered.entity
 
 import org.jetbrains.annotations.NotNull
 import java.io.Serializable
+import java.util.*
 import javax.persistence.*
 
 
@@ -18,7 +19,11 @@ class flat(
     @field:NotNull
     var address: String? = null,
     @ManyToMany
-    var users: Set<user>? = null
+    var users: MutableSet<user> = mutableSetOf(),
+    @Column(updatable = false)
+    var secretToken: String = UUID.randomUUID().toString().replace("-", ""),
+    @ManyToMany
+    var admins: MutableSet<user> = mutableSetOf(),
 ): Comparable<flat>, Serializable {
 
     override fun equals(other: Any?): Boolean {
