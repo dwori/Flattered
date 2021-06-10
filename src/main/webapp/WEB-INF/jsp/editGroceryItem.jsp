@@ -71,15 +71,17 @@
                     </div>
 
                     <! ---------------- Flat ---------------- -->
-                    <!-- TODO: Verknüpfung von grocery list Ansicht mit Flat-->
+                    <form:hidden path="flat"></form:hidden>
 
 
                     <! ---------------- requestedBY ---------------- -->
                     <div class="mb-3">
                         <label for="inputRequester" class="form-label">Requested By</label>
-                        <input class="form-control" id="inputRequester" type="text" name="requestedBy"
-                               value="<c:out value="${groceryItem.requestedBy}"/>">
+                        <input class="form-control" id="inputRequester" type="text" readonly="readonly" name="requestedBy"
+                               value="<c:out value="${currentUser.username}"/>">
                     </div>
+
+
 
                     <! ---------------- buttons ---------------- -->
                     <div class="mb-3">

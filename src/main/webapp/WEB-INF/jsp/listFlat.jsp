@@ -48,17 +48,11 @@
     <!--  Messages  ----------------------------------------------------------- -->
 
     <!--  2 simple buttons -----------------------------------------------------------
-    <div class="row">
-        <div class="col-md-4 col-md-offset-4">
-            <p>
-                <a href="/dashboard" class="btn btn-primary">Dashboard</a>
-                <a href="/editGroceryItem" class="btn btn-success">Add new Item</a>
-            </p>
-        </div>
-    </div>
+
      2 simple buttons ----------------------------------------------------------- -->
     <div class="row row-cols-1 row-cols-md-2 g-4">
         <c:forEach items="${flatList}" var="flat">
+            <c:if test="${flat.users.contains(currentUser)}">
         <div class="col">
             <div class="card">
                 <div class="card-body">
@@ -78,13 +72,16 @@
                             </tr>
                         </c:forEach>
                     </table>
+                    <c:if test="${flat.admins.contains(currentUser)}">
                     <div class="d-grid gap-2 d-md-block">
                         <a href="editFlat?id=${flat.id}" class="btn btn-success" type="btn">Edit</a>
                         <a href="deleteFlat?id=${flat.id}" class="btn btn-danger" type="btn">Delete</a>
                     </div>
+                    </c:if>
                 </div>
             </div>
         </div>
+            </c:if>
         </c:forEach>
         <div class="col">
             <div class="card">

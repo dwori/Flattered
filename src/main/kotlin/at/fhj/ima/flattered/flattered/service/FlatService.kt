@@ -6,18 +6,22 @@ import org.springframework.stereotype.Service
 
 @Service
 class FlatService(val flatRepository: flatRepository) {
-    fun createFlat(){
-
+    fun createFlat(): flat{
+        return flat()
     }
 
-    fun editFlat(){
-
+    fun getFlat(id: Int): flat{
+        return flatRepository.findById(id).get()
     }
 
-    fun deleteFlat(){
-
+    fun findAllFlats(): MutableList<flat>{
+        return flatRepository.findAll()
     }
-    fun saveFlat(flat: flat){
-        flatRepository.save(flat)
+
+    fun deleteFlat(flat: flat){
+        return flatRepository.delete(flat)
+    }
+    fun saveFlat(flat: flat): flat{
+        return flatRepository.save(flat)
     }
 }

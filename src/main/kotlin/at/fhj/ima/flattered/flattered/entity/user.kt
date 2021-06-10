@@ -23,6 +23,8 @@ class user(
     var userRole: userRole,
     @ManyToMany(mappedBy = "admins")
     var adminstratedFlats: Set<flat>? = null,
+    @ManyToOne
+    var currentUserflat: flat? = null
 ): Comparable<user>{
 
     override fun equals(other: Any?): Boolean {

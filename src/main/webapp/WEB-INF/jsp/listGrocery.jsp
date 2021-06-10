@@ -85,6 +85,7 @@
                 <tbody>
                 <!--  list all employees ----------------------------------------------------------- -->
                 <c:forEach items="${groceryList}" var="groceryItem">
+                    <c:if test="${groceryItem.flat == currentUserFlat}">
                     <tr>
                         <td>${groceryItem.name}</td>
                         <td>${groceryItem.amount}</td>
@@ -112,6 +113,7 @@
                             <a href="checkGroceryItem?id=${groceryItem.id}" class="btn btn-xs btn-warning">Check</a>
                         </td>
                     </tr>
+                    </c:if>
                 </c:forEach>
                 <!--  list all employees ----------------------------------------------------------- -->
                 </tbody>

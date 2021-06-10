@@ -19,7 +19,7 @@ class groceryItem(
     var done: Boolean = false,
     @field:NotNull
     var amount: Int? = null,
-    //@field:NotNull
+    @field:NotNull
     var requestedBy: String? = null,
     var comment: String? = null,
     @ManyToOne @field:NotNull
