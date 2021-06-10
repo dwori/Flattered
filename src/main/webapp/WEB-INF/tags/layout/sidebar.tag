@@ -19,7 +19,19 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <a href="/logout" class="btn btn-danger float-end my-2 mx-2">Logout</a>
+    <a href="/logout" class="btn btn-danger float-end my-2 mx-2">Logout from <b>${currentUser.username}</b></a>
+    <c:if test="${activePage == 'dashboard'}">
+        <div class="dropdown float-end my-2 mx-2">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="switchFlat" data-bs-toggle="dropdown" aria-expanded="false">
+                Switch active Flat
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="switchFlat">
+                <c:forEach items="${userFlats}" var="flats">
+                    <li><a class="dropdown-item" href="/switchCurrentFlat?id=${flats.id}">${flats.name}</a></li>
+                </c:forEach>
+            </ul>
+        </div>
+    </c:if>
     <bootstrap:bootstrap-metadata/>
         <title>${title}</title>
     <bootstrap:bootstrap-css/>

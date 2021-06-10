@@ -1,6 +1,7 @@
 package at.fhj.ima.flattered.flattered.service
 
 import at.fhj.ima.flattered.flattered.entity.flat
+import at.fhj.ima.flattered.flattered.entity.user
 import at.fhj.ima.flattered.flattered.repository.flatRepository
 import org.springframework.stereotype.Service
 
@@ -24,4 +25,10 @@ class FlatService(val flatRepository: flatRepository) {
     fun saveFlat(flat: flat): flat{
         return flatRepository.save(flat)
     }
+    fun getFlatUsers(id: Int): Int{
+        val flat = getFlat(id)
+        return flat.users.size
+    }
+
+
 }
