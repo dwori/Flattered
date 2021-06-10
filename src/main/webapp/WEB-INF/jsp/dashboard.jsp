@@ -34,8 +34,29 @@
     <title>Grocery List</title>
     <bootstrap:bootstrap-css/>
 
-    <!-- Switch current Flat -->
+    <div class="justify-content-center mx-5 my-5 text-center">
+        <!--  Messages  ----------------------------------------------------------- -->
 
+        <!--  Error message ----------------------------------------------------------- -->
+        <c:if test="${not empty errorMessage}">
+            <div class="alert alert-danger" role="alert">${errorMessage}</div>
+        </c:if>
+        <!--  Error message ----------------------------------------------------------- -->
+
+        <!--  Warning message ----------------------------------------------------------- -->
+        <c:if test="${not empty warningMessage}">
+            <div class="alert alert-warning" role="warning">${warningMessage}</div>
+        </c:if>
+        <!--  Warning message ----------------------------------------------------------- -->
+
+        <!--  successful message ----------------------------------------------------------- -->
+        <c:if test="${not empty message}">
+            <div class="alert alert-success" role="warning">${message}</div>
+        </c:if>
+        <!--  successful message ----------------------------------------------------------- -->
+
+        <!--  Messages  ----------------------------------------------------------- -->
+    </div>
 
     <!-- -------- top row ------- -->
     <div class="row justify-content-center">

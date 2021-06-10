@@ -18,13 +18,15 @@ class WebSecurityConfiguration : WebSecurityConfigurerAdapter() {
         http
             .authorizeRequests()
             // you anonymous urls here
-            .antMatchers("/anonymous").permitAll()
+            .antMatchers("/startPage").permitAll()
             //.antMatchers("/anonymous1").permitAll()
             //.antMatchers("/anonymous2").permitAll()
             //.antMatchers("/anonymous3").permitAll()
             .anyRequest().authenticated()
             .and()
             .formLogin()
+            //.loginPage("/login")
+            //.permitAll()
             .and()
             .rememberMe().key("uniqueAndSecret").userDetailsService(myUserDetailsService);
     }

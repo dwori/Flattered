@@ -49,6 +49,12 @@
                             ${addressInvalid}
                     </div>
 
+                    <! ---------------- admins ---------------- -->
+                    <form:hidden path="admins"></form:hidden>
+
+                    <! ---------------- users ----------------- -->
+                    <form:hidden path="users"></form:hidden>
+
                     <! ---------------- buttons ---------------- -->
                     <div class="mb-3">
                         <button type="submit" class="btn btn-primary">Submit</button>

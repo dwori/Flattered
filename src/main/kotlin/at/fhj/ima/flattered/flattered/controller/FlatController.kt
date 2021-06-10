@@ -26,27 +26,22 @@ class FlatController(val flatService: FlatService,
 
     @RequestMapping("/editFlat", method = [RequestMethod.GET])
     fun editFlat(model: Model, @RequestParam(required = false) id: Int?): String {
+        val currentUser = userService.getCurrentUser()
         if (id != null) {
             val flat = flatService.getFlat(id)
             model["flat"] = flat
         } else {
             val newFlat = flatService.createFlat()
             model["flat"] = newFlat
+            newFlat.admins.add(currentUser)
+            newFlat.users.add(currentUser)
         }
         return "/editFlat"
     }
     @Secured("ROLE_USER")
     @RequestMapping("/changeFlat", method = [RequestMethod.POST])
     fun changeFlat(@ModelAttribute flat: flat): String {
-        val currentUser = userService.getCurrentUser()
-
-        if (flat.admins.contains(currentUser)){
-            flatService.saveFlat(flat)
-        }else{
-            flat.admins.add(currentUser) //adds the current user automatically to the new flat as admin and as user
-            flat.users.add(currentUser)
-            flatService.saveFlat(flat)
-        }
+        flatService.saveFlat(flat)
 
         //go back to the entire list
         return "redirect:/listFlat"

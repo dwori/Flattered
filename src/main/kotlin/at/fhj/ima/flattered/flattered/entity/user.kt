@@ -20,7 +20,7 @@ class user(
     @ManyToMany(mappedBy = "users")
     var flats: Set<flat>? = null,
     @Enumerated(EnumType.STRING)
-    var userRole: userRole,
+    var userRole: userRole = at.fhj.ima.flattered.flattered.entity.userRole.ROLE_USER,
     @ManyToMany(mappedBy = "admins")
     var adminstratedFlats: Set<flat>? = null,
     @ManyToOne

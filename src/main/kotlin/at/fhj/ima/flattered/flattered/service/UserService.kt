@@ -5,6 +5,7 @@ import at.fhj.ima.flattered.flattered.entity.user
 import at.fhj.ima.flattered.flattered.repository.userRepository
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Service
+import java.util.*
 
 @Service
 class UserService (val userRepository: userRepository){
@@ -28,4 +29,12 @@ class UserService (val userRepository: userRepository){
     fun saveUser(user: user): user{
         return userRepository.save(user)
     }
+    fun getUserById(id: Int): Optional<user> {
+        return userRepository.findById(id)
+    }
+    //todo createuser method
+    /*fun createUser(): user{
+        return user()
+    }*/
+
 }

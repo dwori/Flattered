@@ -9,6 +9,7 @@ import org.springframework.ui.set
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.servlet.mvc.support.RedirectAttributes
 
 
 @Controller
@@ -41,12 +42,15 @@ class DashboardController(val flatService: FlatService,
     }
 
     @RequestMapping("/switchCurrentFlat",method = [RequestMethod.GET])
-    fun switchCurrentFlat(@RequestParam id: Int): String{
+    fun switchCurrentFlat(@RequestParam id: Int, redirectAttributes: RedirectAttributes): String{
         val currentUser = userService.getCurrentUser()
         currentUser.currentUserflat = flatService.getFlat(id)
         userService.saveUser(currentUser)
 
-        return "dashboard"
+        val message = "Switched to Flat: ${flatService.getFlat(id).name}!"
+        redirectAttributes.addFlashAttribute("message",message)
+
+        return "redirect:/dashboard"
     }
 
 }

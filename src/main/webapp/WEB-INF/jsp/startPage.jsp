@@ -24,8 +24,8 @@
         <div class="card-header text-center">
             Welcome to Flattered!
         </div>
-            <a class="btn btn-primary mx-auto mb-2 mt-2 href=#" style="width: 100px">Login</a>
-            <a class="btn btn-primary mx-auto mb-2 href=#" style="width: 100px">Register</a>
+            <a href="/login" class="btn btn-primary mx-auto mb-2 mt-2" style="width: 100px">Login</a>
+            <a href="/register" class="btn btn-primary mx-auto mb-2" style="width: 100px">Register</a>
     </div>
     </div>
 </layout:sidebar>
