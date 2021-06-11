@@ -70,22 +70,18 @@
                                value="<c:out value="${groceryItem.done}"/>">
                     </div>
 
-                    <! ---------------- List ---------------- -->
-                    <!-- TODO: Verknüpfung von grocery list Ansicht mit Flat-->
-                    <div class="mb-3">
-                        <div class="mb-3">
-                            <label for="inputGrocerylist" class="form-label">List</label>
-                            <input class="form-control" id="inputGrocerylist" type="number" name="List"
-                                   value="<c:out value="${groceryItem.groceryList.id}"/>">
-                        </div>
-                    </div>
+                    <! ---------------- Flat ---------------- -->
+                    <form:hidden path="flat"></form:hidden>
+
 
                     <! ---------------- requestedBY ---------------- -->
                     <div class="mb-3">
                         <label for="inputRequester" class="form-label">Requested By</label>
-                        <input class="form-control" id="inputRequester" type="text" name="requestedBy"
-                               value="<c:out value="${groceryItem.requestedBy}"/>">
+                        <input class="form-control" id="inputRequester" type="text" readonly="readonly" name="requestedBy"
+                               value="<c:out value="${currentUser.username}"/>">
                     </div>
+
+
 
                     <! ---------------- buttons ---------------- -->
                     <div class="mb-3">

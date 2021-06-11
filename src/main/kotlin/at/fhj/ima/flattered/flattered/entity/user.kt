@@ -1,35 +1,36 @@
 package at.fhj.ima.flattered.flattered.entity
 
-
 import org.jetbrains.annotations.NotNull
 import java.io.Serializable
-import java.util.*
 import javax.persistence.*
 
-
+enum class userRole{
+    ROLE_USER,
+    ROLE_ADMIN
+}
 
 @Entity
-class flat(
+class user(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int? = null,
     @Column(nullable = false, unique = true)
-    @field:NotNull
-    var name: String? = null,
-    @field:NotNull
-    var address: String? = null,
-    @ManyToMany
-    var users: MutableSet<user> = mutableSetOf(),
-    @Column(updatable = false)
-    var secretToken: String = UUID.randomUUID().toString().replace("-", ""),
-    @ManyToMany
-    var admins: MutableSet<user> = mutableSetOf(),
-): Comparable<flat>, Serializable {
+    var username: String,
+    var password: String,
+    @ManyToMany(mappedBy = "users")
+    var flats: Set<flat>? = null,
+    @Enumerated(EnumType.STRING)
+    var userRole: userRole = at.fhj.ima.flattered.flattered.entity.userRole.ROLE_USER,
+    @ManyToMany(mappedBy = "admins")
+    var adminstratedFlats: Set<flat>? = null,
+    @ManyToOne
+    var currentUserflat: flat? = null
+): Comparable<user>{
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
-        other as flat
+        other as user
         if (id != other.id) return false
         return true
     }
@@ -38,7 +39,7 @@ class flat(
         return id.hashCode()
     }
 
-    override fun compareTo(other: flat): Int {
+    override fun compareTo(other: user): Int {
         return compareValues(id, other.id)
     }
 }

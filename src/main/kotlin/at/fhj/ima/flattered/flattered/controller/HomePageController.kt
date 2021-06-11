@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod
 class HomePageController {
     @RequestMapping("",method = [RequestMethod.GET])
     fun homePage(): String{
-        return "redirect:dashboard"
+        return "startPage"
     }
 }

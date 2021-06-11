@@ -19,11 +19,11 @@ class groceryItem(
     var done: Boolean = false,
     @field:NotNull
     var amount: Int? = null,
-    //@field:NotNull
+    @field:NotNull
     var requestedBy: String? = null,
     var comment: String? = null,
     @ManyToOne @field:NotNull
-    var groceryList: GroceryList? = null
+    var flat: flat? = null
 ): Comparable<groceryItem>, Serializable {
 
     override fun equals(other: Any?): Boolean {

@@ -18,14 +18,45 @@
 <%@taglib prefix = "sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 
 <!-- Refreshes side every 10 seconds-->
-<META HTTP-EQUIV="Refresh" CONTENT="10">
+<META HTTP-EQUIV="Refresh" CONTENT="30">
 <!DOCTYPE html>
+
 <layout:sidebar title="Dashboard" activePage="dashboard">
 <h1 class="text-center">DASHBOARD</h1>
-<!-- TODO dashboard content -->
     <sql:setDataSource var = "groceryItems" driver = "com.mysql.cj.jdbc.Driver"
                        url = "jdbc:mysql://localhost/flattered"
                        user = "flattered"  password = "flattered"/>
+    <sql:setDataSource var = "user" driver = "com.mysql.cj.jdbc.Driver"
+                       url = "jdbc:mysql://localhost/flattered"
+                       user = "flattered"  password = "flattered"/>
+
+    <bootstrap:bootstrap-metadata/>
+    <title>Grocery List</title>
+    <bootstrap:bootstrap-css/>
+
+    <div class="justify-content-center mx-5 my-5 text-center">
+        <!--  Messages  ----------------------------------------------------------- -->
+
+        <!--  Error message ----------------------------------------------------------- -->
+        <c:if test="${not empty errorMessage}">
+            <div class="alert alert-danger" role="alert">${errorMessage}</div>
+        </c:if>
+        <!--  Error message ----------------------------------------------------------- -->
+
+        <!--  Warning message ----------------------------------------------------------- -->
+        <c:if test="${not empty warningMessage}">
+            <div class="alert alert-warning" role="warning">${warningMessage}</div>
+        </c:if>
+        <!--  Warning message ----------------------------------------------------------- -->
+
+        <!--  successful message ----------------------------------------------------------- -->
+        <c:if test="${not empty message}">
+            <div class="alert alert-success" role="warning">${message}</div>
+        </c:if>
+        <!--  successful message ----------------------------------------------------------- -->
+
+        <!--  Messages  ----------------------------------------------------------- -->
+    </div>
 
     <!-- -------- top row ------- -->
     <div class="row justify-content-center">
@@ -38,8 +69,9 @@
                 <h6 class="card-subtitle mb2">Flatmembers</h6>
             </div>
             <div class="card-body">
-                <!--TODO Anzahl der user aus datenbank abfragen! -->
-                <p class="card-text fs-2 text-center fw-bolder">3</p>
+                <p class="card-text fs-2 text-center fw-bolder">
+                    ${member}
+                </p>
             </div>
         </div>
         <div class="card mx-4 my-4 bg-primary" style="width: 18rem;">
@@ -51,7 +83,9 @@
                 <h6 class="card-subtitle mb2">Where is your flat?</h6>
             </div>
             <div class="card-body">
-                <p class="card-text fs-2 text-center">Moserhofgasse 59a, 8010 Graz</p>
+                <p class="card-text fs-2 text-center">
+                    ${flatName}
+                </p>
             </div>
         </div>
         <div class="card mx-4 my-4 bg-success" style="width: 18rem;">
@@ -65,7 +99,7 @@
             <div class="card-body">
                 <p class="card-text fs-2 text-center fw-bolder">
                     <sql:query dataSource="${groceryItems}" var="result">
-                        SELECT COUNT(*) AS count FROM grocery_item WHERE done = false;
+                        SELECT COUNT(*) AS count FROM grocery_item WHERE (done = false) AND (flat_id = ${currentUser.currentUserflat.id});
                     </sql:query>
                     <c:choose>
                         <c:when test="${result.rows[0].count == 0}">
@@ -90,11 +124,11 @@
                 </div>
                 <div class="card-body">
                     <sql:query dataSource="${groceryItems}" var="result">
-                        SELECT COUNT(*) AS count FROM grocery_item WHERE done = true;
+                        SELECT COUNT(*) AS count FROM grocery_item WHERE (done = true) AND (flat_id = ${currentUser.currentUserflat.id});
                     </sql:query>
                     <c:set var="isDone" value="${result.rows[0].count}"></c:set>
                     <sql:query dataSource="${groceryItems}" var="results">
-                        SELECT COUNT(*) AS count FROM grocery_item WHERE done = false;
+                        SELECT COUNT(*) AS count FROM grocery_item WHERE (done = false) AND (flat_id = ${currentUser.currentUserflat.id});
                     </sql:query>
                     <c:set var="isNotDone" value="${results.rows[0].count}"></c:set>
 
@@ -146,4 +180,5 @@
                 </div>
             </div>
         </div>
+    <bootstrap:bootstrap-js/>
 </layout:sidebar>

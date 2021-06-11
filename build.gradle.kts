@@ -28,6 +28,12 @@ dependencies {
 
 	compileOnly("org.apache.tomcat.embed:tomcat-embed-jasper")
 	implementation("javax.servlet:jstl")
+
+	//security
+	implementation("org.springframework.boot:spring-boot-starter-security")
+
+	// spring-security-taglibs
+	//implementation("org.springframework.security:spring-security-taglibs")
 }
 
 tasks.withType<KotlinCompile> {

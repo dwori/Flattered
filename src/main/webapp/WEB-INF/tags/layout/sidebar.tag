@@ -8,10 +8,10 @@
 
 <%@ attribute name="title" required="true" %>
 <%@ attribute name="activePage" required="true" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix="bootstrap" tagdir="/WEB-INF/tags/bootstrap" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
 <!DOCTYPE html>
@@ -19,7 +19,19 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <a href="/logout" class="btn btn-danger float-end my-2 mx-2">Logout from <b>${currentUser.username}</b></a>
+    <c:if test="${activePage == 'dashboard'}">
+        <div class="dropdown float-end my-2 mx-2">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="switchFlat" data-bs-toggle="dropdown" aria-expanded="false">
+                Switch active Flat
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="switchFlat">
+                <c:forEach items="${userFlats}" var="flats">
+                    <li><a class="dropdown-item" href="/switchCurrentFlat?id=${flats.id}">${flats.name}</a></li>
+                </c:forEach>
+            </ul>
+        </div>
+    </c:if>
     <bootstrap:bootstrap-metadata/>
         <title>${title}</title>
     <bootstrap:bootstrap-css/>
@@ -34,8 +46,7 @@
         </svg>
     </a>
     <div class="container">
-        <a class="navbar-brand" href="/dashboard">Flattered</a>
-        <c:if test="${activePage != 'dashboard'}">
+        <a class="navbar-brand" href="/">Flattered</a>
             <li>
                 <a class="dropdown-item" href="/dashboard">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-speedometer2" viewBox="0 0 16 16">
@@ -45,24 +56,12 @@
                     Dashboard
                 </a>
             </li>
-        </c:if>
         <a class="dropdown-item" href="/listGrocery">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-list-check" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3.854 2.146a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 3.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 7.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
             </svg>
             List Grocery
         </a>
-        <c:if test="${activePage == 'listGrocery'}">
-            <li>
-                <a class="dropdown-item" href="/editGroceryItem">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-plus-square" viewBox="0 0 16 16">
-                        <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                    </svg>
-                     Add new Item
-                </a>
-            </li>
-        </c:if>
         <a class="dropdown-item" href="/listFlat">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-house" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
@@ -70,7 +69,6 @@
             </svg>
             Flats
         </a>
-
     </div>
 </nav>
 <main class="main-content">
