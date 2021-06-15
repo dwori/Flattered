@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
-class UserService (val userRepository: userRepository){
+class UserService (val userRepository: userRepository, val flatService: FlatService){
     fun getCurrentUser(): user{
         val auth = SecurityContextHolder.getContext().authentication
         val username = auth.name
@@ -31,6 +31,17 @@ class UserService (val userRepository: userRepository){
     }
     fun getUserById(id: Int): Optional<user> {
         return userRepository.findById(id)
+    }
+    //todo überarbeiten
+    fun switchCurrentFlat(id: Int?){
+        val currentUser = getCurrentUser()
+        if (id != null){
+            currentUser.currentUserflat = flatService.getFlat(id)
+            saveUser(currentUser)
+        }else{
+            currentUser.currentUserflat = null
+            saveUser(currentUser)
+        }
     }
     //todo createuser method
     /*fun createUser(): user{

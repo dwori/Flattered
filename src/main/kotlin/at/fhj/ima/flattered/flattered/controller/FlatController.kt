@@ -35,6 +35,7 @@ class FlatController(val flatService: FlatService,
             model["flat"] = newFlat
             newFlat.admins.add(currentUser)
             newFlat.users.add(currentUser)
+
         }
         return "/editFlat"
     }
@@ -42,7 +43,7 @@ class FlatController(val flatService: FlatService,
     @RequestMapping("/changeFlat", method = [RequestMethod.POST])
     fun changeFlat(@ModelAttribute flat: flat): String {
         flatService.saveFlat(flat)
-
+        userService.switchCurrentFlat(flat.id)
         //go back to the entire list
         return "redirect:/listFlat"
     }
@@ -65,7 +66,9 @@ class FlatController(val flatService: FlatService,
             for (x in groceryService.findByFlat(id)){
                 groceryService.deleteGroceryItem(x)
             }
-
+            if (currentUser.currentUserflat == flat){
+                userService.switchCurrentFlat(null)
+            }
             flatService.deleteFlat(flat)
 
             //Message displayed for user
@@ -75,6 +78,30 @@ class FlatController(val flatService: FlatService,
             //Throws an error if no permission is granted
             throw Exception("No permission for User: ${currentUser.username}")
         }
+        return "redirect:/listFlat"
+    }
+    @RequestMapping("/joinFlat", method = [RequestMethod.GET])
+    fun joinFlat(model: Model): String{
+        model["flat"] = flatService.createFlat()
+        return "joinFlat"
+
+    }
+
+    @RequestMapping("/joinAFlat", method = [RequestMethod.GET])
+    fun joinAFlat(model: Model,token: String, redirectAttributes: RedirectAttributes): String{
+        val flat = flatService.findFlatByToken(token)
+        val currentUser = userService.getCurrentUser()
+        var message = ""
+
+        if (flat != null){
+            flat.users.add(currentUser)
+            message = "${currentUser.username} was succesfully added to Flat: ${flat.name}"
+            redirectAttributes.addFlashAttribute("message",message)
+        }else{
+            message = "${currentUser.username} could not be added to Flat: ${flat.name}"
+            redirectAttributes.addFlashAttribute("message",message)
+        }
+
         return "redirect:/listFlat"
     }
 }

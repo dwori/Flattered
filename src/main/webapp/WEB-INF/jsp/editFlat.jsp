@@ -57,8 +57,9 @@
 
                     <! ---------------- buttons ---------------- -->
                     <div class="mb-3">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                        <a href="/listFlat" class="btn btn-default">Cancel</a>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                        <button type="button" href="/listFlat" class="btn btn-danger">Cancel</button>
+                        <a href="/joinFlat" class="btn btn-default btn-link float-end mx-4">or join a Flat</a>
                     </div>
 
                 </fieldset>
