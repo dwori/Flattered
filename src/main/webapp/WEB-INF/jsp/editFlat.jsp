@@ -50,13 +50,13 @@
                     </div>
 
                     <! ---------------- token ---------------- -->
-
-                    <div class="mb-3">
-                        <label for="inputToken" class="form-label">Share this token, go invite your friends!</label>
-                        <input class="form-control" id="inputToken" type="text" readonly="readonly" name="token"
-                               value="<c:out value="${flat.secretToken}"/>">
-                    </div>
-
+                    <c:if test="${flat.id != null}">
+                        <div class="mb-3">
+                            <label for="inputToken" class="form-label">Share this token, go invite your friends!</label>
+                            <input class="form-control" id="inputToken" type="text" readonly="readonly" name="token"
+                                   value="<c:out value="${flat.secretToken}"/>">
+                        </div>
+                    </c:if>
                     <! ---------------- admins ---------------- -->
                     <form:hidden path="admins"></form:hidden>
 
@@ -67,26 +67,14 @@
                     <div class="mb-3">
                         <button type="submit" class="btn btn-success">Submit</button>
                         <a href="/listFlat" class="btn btn-danger">Cancel</a>
-                        <c:if test="${flat.id != null}">
-                            <a href="/joinFlat" class="btn btn-default btn-link float-end mx-4">or join a Flat</a>
-                        </c:if>
+                        <a href="/joinFlat" class="btn btn-default btn-link float-end mx-4">or join a Flat</a>
                     </div>
-
                 </fieldset>
             </form:form>
         </div>
     </div>
 
 </div>
-    <script>
-        function copy(){
-            var copyText = document.getElementById("inputToken");
-            copyText.select();
-            copyText.setSelectRange(0,99999);
-            document.execCommand("copy");
-            alert("Token copied to clipboard!");
-        }
-    </script>
 <%--<bootstrap:bootstrap-js/>--%>
 </body>
 </html>
