@@ -69,9 +69,19 @@
                 <h6 class="card-subtitle mb2">Flatmembers</h6>
             </div>
             <div class="card-body">
-                <p class="card-text fs-2 text-center fw-bolder">
-                    ${member}
-                </p>
+                <c:choose>
+                    <c:when test="${currentUser.currentUserflat == null}">
+                        <p class="card-text fs-2 text-center fw-bolder">
+                            No Flat
+                        </p>
+                    </c:when>
+                    <c:otherwise>
+                        <p class="card-text fs-2 text-center fw-bolder">
+                                ${member}
+                        </p>
+                    </c:otherwise>
+                </c:choose>
+
             </div>
         </div>
         <div class="card mx-4 my-4 bg-primary" style="width: 18rem;">
@@ -83,9 +93,18 @@
                 <h6 class="card-subtitle mb2">Where is your flat?</h6>
             </div>
             <div class="card-body">
-                <p class="card-text fs-2 text-center">
-                    ${flatName}
-                </p>
+                <c:choose>
+                    <c:when test="${currentUser.currentUserflat == null}">
+                        <p class="card-text fs-2 text-center fw-bolder">
+                            No Flat
+                        </p>
+                    </c:when>
+                    <c:otherwise>
+                        <p class="card-text fs-2 text-center">
+                                ${flatName}
+                        </p>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
         <div class="card mx-4 my-4 bg-success" style="width: 18rem;">

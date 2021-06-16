@@ -1,11 +1,13 @@
 package at.fhj.ima.flattered.flattered.controller
 
 import at.fhj.ima.flattered.flattered.entity.flat
+import at.fhj.ima.flattered.flattered.entity.user
 import at.fhj.ima.flattered.flattered.repository.flatRepository
 import at.fhj.ima.flattered.flattered.repository.groceryItemRepository
 import at.fhj.ima.flattered.flattered.service.FlatService
 import at.fhj.ima.flattered.flattered.service.GroceryService
 import at.fhj.ima.flattered.flattered.service.UserService
+import org.eclipse.jdt.internal.compiler.lookup.InferenceContext18.getParameter
 import org.springframework.security.access.annotation.Secured
 import org.springframework.stereotype.Controller
 import org.springframework.transaction.annotation.Transactional
@@ -87,14 +89,15 @@ class FlatController(val flatService: FlatService,
 
     }
 
-    @RequestMapping("/joinAFlat", method = [RequestMethod.GET])
-    fun joinAFlat(model: Model,token: String, redirectAttributes: RedirectAttributes): String{
+    @RequestMapping("/joinAFlat", method = [RequestMethod.POST])
+    fun joinAFlat(@RequestParam token: String, redirectAttributes: RedirectAttributes): String{
         val flat = flatService.findFlatByToken(token)
         val currentUser = userService.getCurrentUser()
         var message = ""
 
         if (flat != null){
             flat.users.add(currentUser)
+            flatService.saveFlat(flat)
             message = "${currentUser.username} was succesfully added to Flat: ${flat.name}"
             redirectAttributes.addFlashAttribute("message",message)
         }else{
@@ -104,4 +107,13 @@ class FlatController(val flatService: FlatService,
 
         return "redirect:/listFlat"
     }
+    @RequestMapping("/kick", method = [RequestMethod.POST])
+    fun kick(flatId: Int, userId: Int): String{
+        val flat = flatService.getFlat(flatId)
+        val user = userService.getUserById(userId)
+        flat.users.remove(user)
+        flatService.saveFlat(flat)
+        return "redirect:/listFlat"
+    }
+
 }

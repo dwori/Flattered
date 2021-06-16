@@ -15,16 +15,16 @@
 
 <layout:sidebar title="Join a Flat" activePage="joinFlat">
 
-    <form action="/joinAFlat">
-    <div class="mb-3 mx-4 my-4 justify-content-center">
-        <h1>JOIN A FLAT</h1>
-        <label for="token">Token:</label>
-        <input id="token" class="form-control form-control-lg" type="text" placeholder="Enter Token here">
-    </div>
-    <div class="mb-3 mx-4 my-4 justify-content-center">
-        <button type="submit" value="token" class="btn btn-success">Join</button>
-        <button type="button" href="/listFlat" class="btn btn-danger">Cancel</button>
-    </div>
-    </form>
+    <form:form action="/joinAFlat" method="post">
+        <div class="mb-3 mx-4 my-4 justify-content-center">
+            <h1>JOIN A FLAT</h1>
+            <label for="token">Token:</label>
+            <input id="token" name="token" class="form-control form-control-lg" type="string" placeholder="Enter Token here">
+        </div>
+        <div class="mb-3 mx-4 my-4 justify-content-center">
+            <button type="submit" class="btn btn-success">Join</button>
+            <a href="/listFlat" class="btn btn-danger">Cancel</a>
+        </div>
+    </form:form>
     <bootstrap:bootstrap-js/>
 </layout:sidebar>

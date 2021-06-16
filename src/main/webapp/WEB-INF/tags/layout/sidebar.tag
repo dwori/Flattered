@@ -31,25 +31,20 @@
                     Switch active Flat
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="switchFlat">
-                    <c:forEach items="${userFlats}" var="flats">
-                        <li><a class="dropdown-item" href="/switchCurrentFlat?id=${flats.id}">${flats.name}</a></li>
-                    </c:forEach>
+                    <c:choose>
+                        <c:when test="${currentUser.currentUserflat == null}">
+                            <p class="card-text fs-2 text-center fw-bolder">
+                                No Flat
+                            </p>
+                        </c:when>
+                        <c:otherwise>
+                            <c:forEach items="${userFlats}" var="flats">
+                                <li><a class="dropdown-item" href="/switchCurrentFlat?id=${flats.id}">${flats.name}</a></li>
+                            </c:forEach>
+                        </c:otherwise>
+                    </c:choose>
                 </ul>
             </div>
-            <!--<p>
-                <button class="btn btn-secondary float-end my-2 mx-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                    Switch Flat
-                </button>
-            </p>
-            <div class="collapse" id="collapseExample">
-                <div class="card card-body">
-                    <ul>
-                        <c:forEach items="${userFlats}" var="flats">
-                            <li><a class="dropdown-item" href="/switchCurrentFlat?id=${flats.id}">${flats.name}</a></li>
-                        </c:forEach>
-                    </ul>
-                </div>
-            </div>-->
         </c:if>
         </div>
     </div>

@@ -11,6 +11,8 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix="bootstrap" tagdir="/WEB-INF/tags/bootstrap" %>
 <%@taglib prefix="layout" tagdir="/WEB-INF/tags/layout" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 
 <layout:sidebar title="Flats" activePage="listFlat">
 
@@ -63,12 +65,30 @@
                         <tr>
                             <th>Username</th>
                             <th>Actions</th>
+                            <th>Role</th>
                         </tr>
                         </thead>
                         <c:forEach items="${flat.users}" var="user">
                             <tr>
                                 <td>${user.username}</td>
-                                <td><a href="#" class="btn btn-danger" type="btn">Kick User</a></td>
+                                <c:choose>
+                                    <c:when test="${flat.admins.contains(currentUser) && !flat.admins.contains(user)}">
+                                        <form:form action="/kick?flat=${flat.id}&user=${user.id}" method="post">
+                                            <td><button class="btn btn-danger" type="submit">Kick User</button></td>
+                                        </form:form>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td><p></p></td>
+                                    </c:otherwise>
+                                </c:choose>
+
+                                <c:if test="${flat.admins.contains(user)}">
+                                    <td>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-hammer" viewBox="0 0 16 16">
+                                            <path d="M9.972 2.508a.5.5 0 0 0-.16-.556l-.178-.129a5.009 5.009 0 0 0-2.076-.783C6.215.862 4.504 1.229 2.84 3.133H1.786a.5.5 0 0 0-.354.147L.146 4.567a.5.5 0 0 0 0 .706l2.571 2.579a.5.5 0 0 0 .708 0l1.286-1.29a.5.5 0 0 0 .146-.353V5.57l8.387 8.873A.5.5 0 0 0 14 14.5l1.5-1.5a.5.5 0 0 0 .017-.689l-9.129-8.63c.747-.456 1.772-.839 3.112-.839a.5.5 0 0 0 .472-.334z"/>
+                                        </svg>
+                                    </td>
+                                </c:if>
                             </tr>
                         </c:forEach>
                     </table>
