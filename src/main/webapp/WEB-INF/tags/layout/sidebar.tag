@@ -24,19 +24,33 @@
             <img src="img/Logo_small.png">
         </div>
         <div class="col">
-            <a href="/logout" class="btn btn-danger float-end my-2 mx-2">Logout from <b>${currentUser.username}</b></a>
-            <c:if test="${activePage == 'dashboard'}">
-                <div class="dropdown float-end my-2 mx-2">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="switchFlat" data-bs-toggle="dropdown" aria-expanded="false">
-                        Switch active Flat
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="switchFlat">
+        <a href="/logout" class="btn btn-danger float-end my-2 mx-2">Logout from <b>${currentUser.username}</b></a>
+        <c:if test="${activePage == 'dashboard'}">
+            <div class="dropdown float-end my-2 mx-2">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="switchFlat" data-bs-toggle="dropdown" aria-expanded="false">
+                    Switch active Flat
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="switchFlat">
+                    <c:forEach items="${userFlats}" var="flats">
+                        <li><a class="dropdown-item" href="/switchCurrentFlat?id=${flats.id}">${flats.name}</a></li>
+                    </c:forEach>
+                </ul>
+            </div>
+            <!--<p>
+                <button class="btn btn-secondary float-end my-2 mx-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    Switch Flat
+                </button>
+            </p>
+            <div class="collapse" id="collapseExample">
+                <div class="card card-body">
+                    <ul>
                         <c:forEach items="${userFlats}" var="flats">
                             <li><a class="dropdown-item" href="/switchCurrentFlat?id=${flats.id}">${flats.name}</a></li>
                         </c:forEach>
                     </ul>
                 </div>
-            </c:if>
+            </div>-->
+        </c:if>
         </div>
     </div>
     <bootstrap:bootstrap-metadata/>
@@ -107,7 +121,6 @@
         document.querySelector('.main-content').style.marginLeft = "0px";
     }
 </script>
-<bootstrap:bootstrap-js/>
 </body>
 </html>
 
