@@ -22,7 +22,7 @@ class MyUserPrincipal(val user: user) : UserDetails {
         return true;
     }
 
-    override fun getUsername(): String {
+    override fun getUsername(): String? {
         return user.username;
     }
 
@@ -30,7 +30,7 @@ class MyUserPrincipal(val user: user) : UserDetails {
         return true;
     }
 
-    override fun getPassword(): String {
+    override fun getPassword(): String? {
         return user.password;
     }
 

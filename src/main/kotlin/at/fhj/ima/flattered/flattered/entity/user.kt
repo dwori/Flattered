@@ -14,9 +14,9 @@ class user(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int? = null,
-    @Column(nullable = false, unique = true)
-    var username: String,
-    var password: String,
+    @Column(nullable = true, unique = true)
+    var username: String? = null,
+    var password: String? = null,
     @ManyToMany(mappedBy = "users")
     var flats: Set<flat>? = null,
     @Enumerated(EnumType.STRING)

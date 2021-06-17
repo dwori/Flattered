@@ -1,5 +1,5 @@
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 
 fun main() {
-    print(BCryptPasswordEncoder().encode("test123"));
+    print(BCryptPasswordEncoder().encode("admin"));
 }
