@@ -19,22 +19,29 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <form:form method="post" action="/logout">
-        <button class="btn btn-danger float-end my-2 mx-2" type="submit">Logout from <b>${currentUser.username}</b></button>
-    </form:form>
-
-    <c:if test="${activePage == 'dashboard'}">
-        <div class="dropdown float-end my-2 mx-2">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="switchFlat" data-bs-toggle="dropdown" aria-expanded="false">
-                Switch active Flat
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="switchFlat">
-                <c:forEach items="${userFlats}" var="flats">
-                    <li><a class="dropdown-item" href="/switchCurrentFlat?id=${flats.id}">${flats.name}</a></li>
-                </c:forEach>
-            </ul>
+    <div class="row">
+        <div class="col justify-content-center">
+            <img src="img/Logo_small.png">
         </div>
-    </c:if>
+        <div class="col">
+          <form:form method="post" action="/logout">
+            <button class="btn btn-danger float-end my-2 mx-2" type="submit">Logout from <b>${currentUser.username}</b></button>
+          </form:form>
+
+          <c:if test="${activePage == 'dashboard'}">
+            <div class="dropdown float-end my-2 mx-2">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="switchFlat" data-bs-toggle="dropdown" aria-expanded="false">
+                  Switch active Flat
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="switchFlat">
+                  <c:forEach items="${userFlats}" var="flats">
+                      <li><a class="dropdown-item" href="/switchCurrentFlat?id=${flats.id}">${flats.name}</a></li>
+                  </c:forEach>
+              </ul>
+             </div>
+          </c:if>
+        </div>
+    </div>
     <bootstrap:bootstrap-metadata/>
         <title>${title}</title>
     <bootstrap:bootstrap-css/>
@@ -49,7 +56,9 @@
         </svg>
     </a>
     <div class="container">
-        <a class="navbar-brand" href="/">Flattered</a>
+        <a class="navbar-brand" href="/">
+            <img src="img/logo_200x200.png">
+        </a>
             <li>
                 <a class="dropdown-item" href="/dashboard">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-speedometer2" viewBox="0 0 16 16">

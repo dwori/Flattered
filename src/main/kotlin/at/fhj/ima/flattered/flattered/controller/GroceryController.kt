@@ -40,8 +40,9 @@ class GroceryController(val groceryService: GroceryService, val userService: Use
     @RequestMapping("/listGrocery", method = [RequestMethod.GET])
     fun listGrocery(model: Model): String{
         model.set("groceryList", groceryService.findAll())
+        model["currentUser"] = userService.getCurrentUser()
 
-            userService.getCurrentUser().currentUserflat?.let { model.set("currentUserFlat", it) }
+        userService.getCurrentUser().currentUserflat?.let { model.set("currentUserFlat", it) }
         return "listGrocery"
     }
 

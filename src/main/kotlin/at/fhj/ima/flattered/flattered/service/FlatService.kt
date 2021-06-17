@@ -29,6 +29,8 @@ class FlatService(val flatRepository: flatRepository) {
         val flat = getFlat(id)
         return flat.users.size
     }
-
+    fun findFlatByToken(token: String): flat {
+        return flatRepository.findByToken(token)
+    }
 
 }

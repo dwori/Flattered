@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
 
 interface flatRepository : JpaRepository<flat, Int>{
-    @Query("FROM flat WHERE id = id ")
-    fun findBySearchText(@Param("search") search: String?): List<flat>
+    @Query("FROM flat WHERE secretToken = :token")
+    fun findByToken(@Param("token") token: String?): flat
 }

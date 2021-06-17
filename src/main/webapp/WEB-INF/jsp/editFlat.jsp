@@ -49,6 +49,14 @@
                             ${addressInvalid}
                     </div>
 
+                    <! ---------------- token ---------------- -->
+                    <c:if test="${flat.id != null}">
+                        <div class="mb-3">
+                            <label for="inputToken" class="form-label">Share this token, go invite your friends!</label>
+                            <input class="form-control" id="inputToken" type="text" readonly="readonly" name="token"
+                                   value="<c:out value="${flat.secretToken}"/>">
+                        </div>
+                    </c:if>
                     <! ---------------- admins ---------------- -->
                     <form:hidden path="admins"></form:hidden>
 
@@ -57,10 +65,10 @@
 
                     <! ---------------- buttons ---------------- -->
                     <div class="mb-3">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                        <a href="/listFlat" class="btn btn-default">Cancel</a>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                        <a href="/listFlat" class="btn btn-danger">Cancel</a>
+                        <a href="/joinFlat" class="btn btn-default btn-link float-end mx-4">or join a Flat</a>
                     </div>
-
                 </fieldset>
             </form:form>
         </div>

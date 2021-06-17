@@ -67,9 +67,19 @@
                 <h6 class="card-subtitle mb2">Flatmembers</h6>
             </div>
             <div class="card-body">
-                <p class="card-text fs-2 text-center fw-bolder">
-                    ${member}
-                </p>
+                <c:choose>
+                    <c:when test="${currentUser.currentUserflat == null}">
+                        <p class="card-text fs-2 text-center fw-bolder">
+                            No Flat
+                        </p>
+                    </c:when>
+                    <c:otherwise>
+                        <p class="card-text fs-2 text-center fw-bolder">
+                                ${member}
+                        </p>
+                    </c:otherwise>
+                </c:choose>
+
             </div>
         </div>
         <div class="card mx-4 my-4 bg-primary" style="width: 18rem;">
@@ -81,9 +91,18 @@
                 <h6 class="card-subtitle mb2">Where is your flat?</h6>
             </div>
             <div class="card-body">
-                <p class="card-text fs-2 text-center">
-                    ${flatName}
-                </p>
+                <c:choose>
+                    <c:when test="${currentUser.currentUserflat == null}">
+                        <p class="card-text fs-2 text-center fw-bolder">
+                            No Flat
+                        </p>
+                    </c:when>
+                    <c:otherwise>
+                        <p class="card-text fs-2 text-center">
+                                ${flatName}
+                        </p>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
         <div class="card mx-4 my-4 bg-success" style="width: 18rem;">
@@ -95,20 +114,28 @@
                 <h6 class="card-subtitle mb2">How many Items have to be bought</h6>
             </div>
             <div class="card-body">
-                <p class="card-text fs-2 text-center fw-bolder">
-                    <sql:query dataSource="${groceryItems}" var="result">
-                        SELECT COUNT(*) AS count FROM grocery_item WHERE (done = false) AND (flat_id = ${currentUser.currentUserflat.id});
-                    </sql:query>
-                    <c:choose>
-                        <c:when test="${result.rows[0].count == 0}">
-                            Nothing new to buy!
-                        </c:when>
-                        <c:otherwise>
-                            <c:out value="${result.rows[0].count}"></c:out>
-                        </c:otherwise>
-                    </c:choose>
-
-                </p>
+                <c:choose>
+                    <c:when test="${currentUser.currentUserflat == null}">
+                        <p class="card-text fs-2 text-center fw-bolder">
+                        No Flat
+                        </p>
+                    </c:when>
+                    <c:otherwise>
+                        <p class="card-text fs-2 text-center fw-bolder">
+                            <sql:query dataSource="${groceryItems}" var="result">
+                                SELECT COUNT(*) AS count FROM grocery_item WHERE (done = false) AND (flat_id = ${currentUser.currentUserflat.id});
+                            </sql:query>
+                            <c:choose>
+                                <c:when test="${result.rows[0].count == 0}">
+                                    Nothing new to buy!
+                                </c:when>
+                                <c:otherwise>
+                                    <c:out value="${result.rows[0].count}"></c:out>
+                                </c:otherwise>
+                            </c:choose>
+                        </p>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
     </div>
@@ -121,31 +148,42 @@
                     <h6 class="card-subtitle mb2">Ratio of done and not done groceries.</h6>
                 </div>
                 <div class="card-body">
-                    <sql:query dataSource="${groceryItems}" var="result">
-                        SELECT COUNT(*) AS count FROM grocery_item WHERE (done = true) AND (flat_id = ${currentUser.currentUserflat.id});
-                    </sql:query>
-                    <c:set var="isDone" value="${result.rows[0].count}"></c:set>
-                    <sql:query dataSource="${groceryItems}" var="results">
-                        SELECT COUNT(*) AS count FROM grocery_item WHERE (done = false) AND (flat_id = ${currentUser.currentUserflat.id});
-                    </sql:query>
-                    <c:set var="isNotDone" value="${results.rows[0].count}"></c:set>
-
                     <c:choose>
-                        <c:when test="${isDone == isDone + isNotDone}">
-                            <div class="progress" style="height: 30px">
-                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="${isDone}"
-                                     aria-valuemin="${isNotDone}" aria-valuemax="${isDone + isNotDone}"
-                                     style="width: ${(isDone / (isDone + isNotDone))*100}%">${isDone} / ${(isDone + isNotDone)}</div>
-                            </div>
+                        <c:when test="${currentUser.currentUserflat == null}">
+                            <p class="card-text fs-2 text-center fw-bolder">
+                                No Flat
+                            </p>
                         </c:when>
                         <c:otherwise>
-                            <div class="progress" style="height: 30px">
-                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow="${isDone}"
-                                     aria-valuemin="${isNotDone}" aria-valuemax="${isDone + isNotDone}"
-                                     style="width: ${(isDone / (isDone + isNotDone))*100}%">${isDone} / ${(isDone + isNotDone)}</div>
-                            </div>
+                            <sql:query dataSource="${groceryItems}" var="result">
+                                SELECT COUNT(*) AS count FROM grocery_item WHERE (done = true) AND (flat_id = ${currentUser.currentUserflat.id});
+                            </sql:query>
+                            <c:set var="isDone" value="${result.rows[0].count}"></c:set>
+                            <sql:query dataSource="${groceryItems}" var="results">
+                                SELECT COUNT(*) AS count FROM grocery_item WHERE (done = false) AND (flat_id = ${currentUser.currentUserflat.id});
+                            </sql:query>
+                            <c:set var="isNotDone" value="${results.rows[0].count}"></c:set>
+
+                            <c:choose>
+                                <c:when test="${isDone == isDone + isNotDone}">
+                                    <div class="progress" style="height: 30px">
+                                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="${isDone}"
+                                             aria-valuemin="${isNotDone}" aria-valuemax="${isDone + isNotDone}"
+                                             style="width: ${(isDone / (isDone + isNotDone))*100}%">${isDone} / ${(isDone + isNotDone)}</div>
+                                    </div>
+                                </c:when>
+                                <c:otherwise>
+                                    <div class="progress" style="height: 30px">
+                                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow="${isDone}"
+                                             aria-valuemin="${isNotDone}" aria-valuemax="${isDone + isNotDone}"
+                                             style="width: ${(isDone / (isDone + isNotDone))*100}%">${isDone} / ${(isDone + isNotDone)}</div>
+                                    </div>
+                                </c:otherwise>
+                            </c:choose>
                         </c:otherwise>
                     </c:choose>
+
+
                     <p class="card-text">Progress</p>
                 </div>
             </div>
