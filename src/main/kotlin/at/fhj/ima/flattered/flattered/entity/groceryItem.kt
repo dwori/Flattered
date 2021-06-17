@@ -12,7 +12,7 @@ class groceryItem(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int? = null,
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = false)
     @field:NotNull
     var name: String? = null,
     @field:NotNull
