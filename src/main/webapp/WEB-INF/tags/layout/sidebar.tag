@@ -5,47 +5,41 @@
   Time: 09:06
   To change this template use File | Settings | File Templates.
 --%>
-
 <%@ attribute name="title" required="true" %>
 <%@ attribute name="activePage" required="true" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix="bootstrap" tagdir="/WEB-INF/tags/bootstrap" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <div class="row">
         <div class="col justify-content-center">
             <img src="img/Logo_small.png">
         </div>
         <div class="col">
-        <a href="/logout" class="btn btn-danger float-end my-2 mx-2">Logout from <b>${currentUser.username}</b></a>
-        <c:if test="${activePage == 'dashboard'}">
+          <form:form method="post" action="/logout">
+            <button class="btn btn-danger float-end my-2 mx-2" type="submit">Logout from <b>${currentUser.username}</b></button>
+          </form:form>
+
+          <c:if test="${activePage == 'dashboard'}">
             <div class="dropdown float-end my-2 mx-2">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="switchFlat" data-bs-toggle="dropdown" aria-expanded="false">
-                    Switch active Flat
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="switchFlat">
-                    <c:choose>
-                        <c:when test="${currentUser.currentUserflat == null}">
-                            <p class="card-text fs-2 text-center fw-bolder">
-                                No Flat
-                            </p>
-                        </c:when>
-                        <c:otherwise>
-                            <c:forEach items="${userFlats}" var="flats">
-                                <li><a class="dropdown-item" href="/switchCurrentFlat?id=${flats.id}">${flats.name}</a></li>
-                            </c:forEach>
-                        </c:otherwise>
-                    </c:choose>
-                </ul>
-            </div>
-        </c:if>
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="switchFlat" data-bs-toggle="dropdown" aria-expanded="false">
+                  Switch active Flat
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="switchFlat">
+                  <c:forEach items="${userFlats}" var="flats">
+                      <li><a class="dropdown-item" href="/switchCurrentFlat?id=${flats.id}">${flats.name}</a></li>
+                  </c:forEach>
+              </ul>
+             </div>
+          </c:if>
         </div>
     </div>
     <bootstrap:bootstrap-metadata/>

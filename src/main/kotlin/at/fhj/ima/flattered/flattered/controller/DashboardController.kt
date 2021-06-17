@@ -41,6 +41,11 @@ class DashboardController(val flatService: FlatService,
         return "dashboard"
     }
 
+    @RequestMapping("/", method = [RequestMethod.GET])
+    fun start(): String{
+        return "redirect:/dashboard"
+    }
+
     @RequestMapping("/switchCurrentFlat",method = [RequestMethod.GET])
     fun switchCurrentFlat(@RequestParam id: Int, redirectAttributes: RedirectAttributes): String{
         val currentUser = userService.getCurrentUser()

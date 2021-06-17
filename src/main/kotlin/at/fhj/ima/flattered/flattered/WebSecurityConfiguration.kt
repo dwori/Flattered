@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher
 
 @Configuration
 @EnableWebSecurity
@@ -17,17 +18,22 @@ class WebSecurityConfiguration : WebSecurityConfigurerAdapter() {
     override fun configure(http: HttpSecurity) {
         http
             .authorizeRequests()
-            // you anonymous urls here
-            .antMatchers("/startPage").permitAll()
-            //.antMatchers("/anonymous1").permitAll()
-            //.antMatchers("/anonymous2").permitAll()
-            //.antMatchers("/anonymous3").permitAll()
-            .anyRequest().authenticated()
-            .and()
+                // you anonymous urls here
+                .antMatchers("/editUser", "/changeUser").permitAll()
+                .antMatchers("/css/*", "/js/*").permitAll()
+                //.antMatchers("/login").permitAll()
+                //.antMatchers("/anonymous3").permitAll()
+                .anyRequest().authenticated()
+                .and()
             .formLogin()
-            //.loginPage("/login")
-            //.permitAll()
-            .and()
+                .loginPage("/login")
+                .permitAll()
+                .and()
+            .logout()
+                .logoutRequestMatcher(AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/login")
+                .permitAll()
+                .and()
             .rememberMe().key("uniqueAndSecret").userDetailsService(myUserDetailsService);
     }
 }

@@ -4,11 +4,13 @@ import at.fhj.ima.flattered.flattered.entity.flat
 import at.fhj.ima.flattered.flattered.entity.user
 import at.fhj.ima.flattered.flattered.repository.userRepository
 import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
 class UserService (val userRepository: userRepository, val flatService: FlatService){
+
     fun getCurrentUser(): user{
         val auth = SecurityContextHolder.getContext().authentication
         val username = auth.name
@@ -32,7 +34,6 @@ class UserService (val userRepository: userRepository, val flatService: FlatServ
     fun getUserById(id: Int): Optional<user> {
         return userRepository.findById(id)
     }
-    //todo überarbeiten
     fun switchCurrentFlat(id: Int?){
         val currentUser = getCurrentUser()
         if (id != null){
@@ -43,9 +44,7 @@ class UserService (val userRepository: userRepository, val flatService: FlatServ
             saveUser(currentUser)
         }
     }
-    //todo createuser method
-    /*fun createUser(): user{
+    fun createUser(): user{
         return user()
-    }*/
-
+    }
 }
