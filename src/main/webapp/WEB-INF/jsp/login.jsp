@@ -29,9 +29,17 @@
 </head>
 <body>
 <main class="main-content">
-    <div class="container" role="main">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
+    <div class="" role="main"
+         style="display: flex;
+         align-items: center;
+         justify-content: center;
+         height: 100%;
+         position: absolute;
+         width: 100%;
+         top: 0;
+         left: 0;">
+        <div class="">
+            <div class="">
                 <form:form method="post" action="/login">
                     <fieldset>
                         <h2 class="form-signin-heading">Login</h2>
@@ -45,7 +53,19 @@
                         <! ---------------- password ---------------- -->
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
+
+                            <div class="input-group" id="showHidePassword">
                             <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+                                <div class="input-group-addon">
+                                    <a href=""><i class="fa fa-eye-slash" aria-hidden="true">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                            <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                        </svg>
+                                    </i></a>
+                                </div>
+                            </div>
+
                         </div>
 
                         <div>
