@@ -216,5 +216,4 @@
                 </div>
             </div>
         </div>
-    <bootstrap:bootstrap-js/>
 </layout:sidebar>

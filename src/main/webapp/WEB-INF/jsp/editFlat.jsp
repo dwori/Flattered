@@ -57,11 +57,6 @@
                                    value="<c:out value="${flat.secretToken}"/>">
                         </div>
                     </c:if>
-                    <! ---------------- admins ---------------- -->
-                    <form:hidden path="admins"></form:hidden>
-
-                    <! ---------------- users ----------------- -->
-                    <form:hidden path="users"></form:hidden>
 
                     <! ---------------- buttons ---------------- -->
                     <div class="mb-3">
@@ -73,9 +68,7 @@
             </form:form>
         </div>
     </div>
-
 </div>
-<%--<bootstrap:bootstrap-js/>--%>
 </body>
 </html>
 </layout:sidebar>

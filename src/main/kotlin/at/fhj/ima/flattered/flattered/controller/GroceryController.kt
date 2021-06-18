@@ -71,10 +71,4 @@ class GroceryController(val groceryService: GroceryService, val userService: Use
 
         return "redirect:/listGrocery"
     }
-
-    /*@RequestMapping("/dashboard", method = [RequestMethod.GET])
-    fun dashboard(model: Model): String{
-        model.set("groceryList", groceryService.findAll())
-        return "dashboard"
-    }*/
 }

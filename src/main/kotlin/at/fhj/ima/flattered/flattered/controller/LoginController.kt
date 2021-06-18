@@ -1,7 +1,6 @@
 package at.fhj.ima.flattered.flattered.controller
 
-import at.fhj.ima.flattered.flattered.entity.groceryItem
-import at.fhj.ima.flattered.flattered.entity.user
+import at.fhj.ima.flattered.flattered.entity.User
 import at.fhj.ima.flattered.flattered.service.UserService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Controller
@@ -33,7 +32,7 @@ class LoginController(val userService: UserService) {
     }
 
     @RequestMapping("/changeUser", method = [RequestMethod.POST])
-    fun changeUser(@ModelAttribute user: user): String {
+    fun changeUser(@ModelAttribute user: User): String {
         user.password = BCryptPasswordEncoder().encode(user.password)
         userService.saveUser(user)
         return "redirect:/"

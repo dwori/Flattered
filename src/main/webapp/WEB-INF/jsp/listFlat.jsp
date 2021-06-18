@@ -53,7 +53,7 @@
 
      2 simple buttons ----------------------------------------------------------- -->
     <div class="row row-cols-1 row-cols-md-2 g-4">
-        <c:forEach items="${flatList}" var="flat">
+        <c:forEach items="${flatList}" var="flat" varStatus="flatStatus">
             <c:if test="${flat.users.contains(currentUser)}">
         <div class="col">
             <div class="card">
@@ -72,7 +72,7 @@
                             <tr>
                                 <td>${user.username}</td>
                                 <c:choose>
-                                    <c:when test="${flat.admins.contains(currentUser) && !flat.admins.contains(user)}">
+                                    <c:when test="${currentUserisAdmin[flatStatus.index] && !flat.admins.contains(user)}">
                                         <form:form action="/kick?flat=${flat.id}&user=${user.id}" method="post">
                                             <td><button class="btn btn-danger" type="submit">Kick User</button></td>
                                         </form:form>
@@ -92,7 +92,7 @@
                             </tr>
                         </c:forEach>
                     </table>
-                    <c:if test="${flat.admins.contains(currentUser)}">
+                    <c:if test="${currentUserisAdmin[flatStatus.index]}">
                     <div class="d-grid gap-2 d-md-block">
                         <a href="editFlat?id=${flat.id}" class="btn btn-success" type="btn">Edit</a>
                         <a href="deleteFlat?id=${flat.id}" class="btn btn-danger" type="btn">Delete</a>
@@ -119,10 +119,6 @@
         </div>
     </div>
 </div>    <!--  End of container -->
-
-<bootstrap:bootstrap-js/>
-
 </body>
 </html>
-
 </layout:sidebar>
