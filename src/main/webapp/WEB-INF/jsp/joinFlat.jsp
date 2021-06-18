@@ -26,5 +26,4 @@
             <a href="/listFlat" class="btn btn-danger">Cancel</a>
         </div>
     </form:form>
-    <bootstrap:bootstrap-js/>
 </layout:sidebar>
