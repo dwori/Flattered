@@ -30,8 +30,8 @@
 <body>
 <main class="main-content">
     <div class="container" role="main">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
                 <form:form method="post" action="/login">
                     <fieldset>
                         <h2 class="form-signin-heading">Login</h2>
@@ -47,6 +47,9 @@
                             <label for="password" class="form-label">Password</label>
                             <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
                         </div>
+
+                        <! ---------------- checkbox ---------------- -->
+                        <p><input type='checkbox' name='remember-me'/> Remember me on this computer.</p>
 
                         <div>
                             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>

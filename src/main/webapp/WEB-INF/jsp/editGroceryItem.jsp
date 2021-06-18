@@ -82,17 +82,13 @@
 
                     <! ---------------- buttons ---------------- -->
                     <div class="mb-3">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                        <a href="/listGrocery" class="btn btn-default">Cancel</a>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                        <a href="/listGrocery" class="btn btn-danger">Cancel</a>
                     </div>
 
                 </fieldset>
             </form:form>
         </div>
     </div>
-
 </div>
-<%--<bootstrap:bootstrap-js/>--%>
-</body>
-</html>
 </layout:sidebar>

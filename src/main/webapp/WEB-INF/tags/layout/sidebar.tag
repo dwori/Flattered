@@ -21,25 +21,39 @@
 
     <div class="row">
         <div class="col justify-content-center">
-            <img src="img/Logo_small.png">
+            <a href="/dashboard"><img src="img/Logo_small.png"></a>
         </div>
         <div class="col">
-          <form:form method="post" action="/logout">
-            <button class="btn btn-danger float-end my-2 mx-2" type="submit">Logout from <b>${currentUser.username}</b></button>
-          </form:form>
-
-          <c:if test="${activePage == 'dashboard'}">
-            <div class="dropdown float-end my-2 mx-2">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="switchFlat" data-bs-toggle="dropdown" aria-expanded="false">
-                  Switch active Flat
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="switchFlat">
-                  <c:forEach items="${userFlats}" var="flats">
-                      <li><a class="dropdown-item" href="/switchCurrentFlat?id=${flats.id}">${flats.name}</a></li>
-                  </c:forEach>
-              </ul>
-             </div>
-          </c:if>
+            <div class="float-end mx-2 my-2">
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="userTask" data-bs-toggle="dropdown" aria-expanded="false">
+                        ${currentUser.username}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                        </svg>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="userTask">
+                        <li><a class="dropdown-item" href="/editUser?id=${currentUser.id}">Edit User profile</a></li>
+                        <li>
+                            <form:form method="post" action="/logout">
+                                <button class="dropdown-item" type="submit">Logout</button>
+                            </form:form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <c:if test="${activePage == 'dashboard'}">
+                <div class="dropdown float-end my-2 mx-2">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="switchFlat" data-bs-toggle="dropdown" aria-expanded="false">
+                      Switch active Flat
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="switchFlat">
+                      <c:forEach items="${userFlats}" var="flats">
+                          <li><a class="dropdown-item" href="/switchCurrentFlat?id=${flats.id}">${flats.name}</a></li>
+                      </c:forEach>
+                    </ul>
+                </div>
+            </c:if>
         </div>
     </div>
     <bootstrap:bootstrap-metadata/>
@@ -85,7 +99,7 @@
 </nav>
 <main class="main-content">
     <button class="openSideNav">
-        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="black" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="black" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
             <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
         </svg>
@@ -110,6 +124,7 @@
         document.querySelector('.main-content').style.marginLeft = "0px";
     }
 </script>
+<bootstrap:bootstrap-js/>
 </body>
 </html>
 

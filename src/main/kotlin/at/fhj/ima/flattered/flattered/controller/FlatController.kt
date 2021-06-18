@@ -1,13 +1,10 @@
 package at.fhj.ima.flattered.flattered.controller
 
+import at.fhj.ima.flattered.flattered.data.FlatFormData
 import at.fhj.ima.flattered.flattered.entity.flat
-import at.fhj.ima.flattered.flattered.entity.user
-import at.fhj.ima.flattered.flattered.repository.flatRepository
-import at.fhj.ima.flattered.flattered.repository.groceryItemRepository
 import at.fhj.ima.flattered.flattered.service.FlatService
 import at.fhj.ima.flattered.flattered.service.GroceryService
 import at.fhj.ima.flattered.flattered.service.UserService
-import org.eclipse.jdt.internal.compiler.lookup.InferenceContext18.getParameter
 import org.springframework.security.access.annotation.Secured
 import org.springframework.stereotype.Controller
 import org.springframework.transaction.annotation.Transactional
@@ -35,25 +32,26 @@ class FlatController(val flatService: FlatService,
         } else {
             val newFlat = flatService.createFlat()
             model["flat"] = newFlat
-            newFlat.admins.add(currentUser)
-            newFlat.users.add(currentUser)
 
         }
         return "/editFlat"
     }
     @Secured("ROLE_USER")
     @RequestMapping("/changeFlat", method = [RequestMethod.POST])
-    fun changeFlat(@ModelAttribute flat: flat): String {
-        flatService.saveFlat(flat)
-        userService.switchCurrentFlat(flat.id)
+    fun changeFlat(@ModelAttribute flat: FlatFormData): String {
+
+        flatService.saveFlatWithFormData(flat)
+        flatService.switchCurrentFlat(flat.id)
         //go back to the entire list
         return "redirect:/listFlat"
     }
 
     @RequestMapping("/listFlat", method = [RequestMethod.GET])
     fun listFlat(model: Model): String{
-        model.set("flatList", flatService.findAllFlats())
-        model.set("currentUser", userService.getCurrentUser())
+        val flats = flatService.findAllFlats()
+        model["flatList"] = flats
+        model["currentUser"] = userService.getCurrentUser()
+        model["currentUserisAdmin"] = userService.isFlatAdmins(flats)
         return "listFlat"
     }
     @Transactional
@@ -69,7 +67,7 @@ class FlatController(val flatService: FlatService,
                 groceryService.deleteGroceryItem(x)
             }
             if (currentUser.currentUserflat == flat){
-                userService.switchCurrentFlat(null)
+                flatService.switchCurrentFlat(null)
             }
             flatService.deleteFlat(flat)
 
@@ -96,7 +94,7 @@ class FlatController(val flatService: FlatService,
         var message = ""
 
         if (flat != null){
-            flat.users.add(currentUser)
+            flat.users?.add(currentUser)
             flatService.saveFlat(flat)
             message = "${currentUser.username} was succesfully added to Flat: ${flat.name}"
             redirectAttributes.addFlashAttribute("message",message)
@@ -111,7 +109,7 @@ class FlatController(val flatService: FlatService,
     fun kick(flatId: Int, userId: Int): String{
         val flat = flatService.getFlat(flatId)
         val user = userService.getUserById(userId)
-        flat.users.remove(user)
+        flat.users?.remove(user)
         flatService.saveFlat(flat)
         return "redirect:/listFlat"
     }

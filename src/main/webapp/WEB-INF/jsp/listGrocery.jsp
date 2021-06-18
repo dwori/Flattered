@@ -147,9 +147,6 @@
 
 
 </div>    <!--  End of container -->
-
-<bootstrap:bootstrap-js/>
-
 </body>
 </html>
 
