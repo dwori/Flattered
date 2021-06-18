@@ -29,18 +29,18 @@
 <body>
 <main class="main-content">
 <div class="container" role="main">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
             <form:form modelAttribute="user" method="post" action="changeUser">
                 <form:hidden path="id" />
                 <fieldset>
                     <h2>
                         <c:choose>
-                            <c:when test="${user.id == null}">
+                            <c:when test="${currentUser.id != null}">
                                 Register
                             </c:when>
                             <c:otherwise>
-                                Edit User #${user.id} - ${user.name}
+                                Edit User #${currentUser.id} - ${currentUser.name}
                             </c:otherwise>
                         </c:choose>
                     </h2>

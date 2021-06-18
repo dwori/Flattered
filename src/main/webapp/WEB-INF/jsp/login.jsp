@@ -30,8 +30,8 @@
 <body>
 <main class="main-content">
     <div class="container" role="main">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
                 <form:form method="post" action="/login">
                     <fieldset>
                         <h2 class="form-signin-heading">Login</h2>
