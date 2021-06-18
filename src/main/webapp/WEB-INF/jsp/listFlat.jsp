@@ -73,7 +73,7 @@
                                 <td>${user.username}</td>
                                 <c:choose>
                                     <c:when test="${currentUserisAdmin[flatStatus.index] && !flat.admins.contains(user)}">
-                                        <form:form action="/kick?flat=${flat.id}&user=${user.id}" method="post">
+                                        <form:form action="/kick?flatId=${flat.id}&userId=${user.id}" method="post">
                                             <td><button class="btn btn-danger" type="submit">Kick User</button></td>
                                         </form:form>
                                     </c:when>

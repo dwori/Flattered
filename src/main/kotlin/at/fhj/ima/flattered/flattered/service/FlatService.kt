@@ -31,7 +31,7 @@ class FlatService(val flatRepository: flatRepository, val userService: UserServi
     //Finds a flat by its id and returns all its members
     fun getFlatUsers(id: Int): Int{
         val flat = getFlat(id)
-        return flat.users?.size!!
+        return flat.users.size
     }
     //Finds a flat by its secretToken
     fun findFlatByToken(token: String): flat {
@@ -62,6 +62,15 @@ class FlatService(val flatRepository: flatRepository, val userService: UserServi
         }else{
             currentUser.currentUserflat = null
             userService.saveUser(currentUser)
+        }
+    }
+    //Switches the active flat of a user, that is not the currentUser
+    fun switchFlat(flatId: Int?,userId: Int){
+        val user = userService.getUserById(userId).get()
+        if (flatId != null){
+            user.currentUserflat = getFlat(flatId)
+        }else{
+            user.currentUserflat = null
         }
     }
 

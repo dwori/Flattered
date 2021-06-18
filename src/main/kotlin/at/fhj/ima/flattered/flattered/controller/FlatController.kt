@@ -94,7 +94,7 @@ class FlatController(val flatService: FlatService,
         var message = ""
 
         if (flat != null){
-            flat.users?.add(currentUser)
+            flat.users.add(currentUser)
             flatService.saveFlat(flat)
             message = "${currentUser.username} was succesfully added to Flat: ${flat.name}"
             redirectAttributes.addFlashAttribute("message",message)
@@ -109,8 +109,9 @@ class FlatController(val flatService: FlatService,
     fun kick(flatId: Int, userId: Int): String{
         val flat = flatService.getFlat(flatId)
         val user = userService.getUserById(userId)
-        flat.users?.remove(user)
+        flat.users = flat.users.filterTo(mutableSetOf()){ user -> user.id != userId}
         flatService.saveFlat(flat)
+        flatService.switchFlat(null,userId)
         return "redirect:/listFlat"
     }
 
