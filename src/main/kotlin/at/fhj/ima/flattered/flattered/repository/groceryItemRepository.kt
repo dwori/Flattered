@@ -7,8 +7,8 @@ import org.springframework.data.repository.query.Param
 
 
 interface groceryItemRepository : JpaRepository<groceryItem, Int>{
-    @Query("SELECT g FROM groceryItem AS g WHERE LOWER(g.name) LIKE CONCAT('%', LOWER(:search), '%')") // AND g.flat = :flat
-    fun findBySearchText(@Param("search") search: String?/*, @Param("flat") flat: Int?*/): List<groceryItem>
+    @Query("SELECT g FROM groceryItem AS g WHERE LOWER(g.name) LIKE CONCAT('%', LOWER(:search), '%')")
+    fun findBySearchText(@Param("search") search: String?): List<groceryItem>
 
     //Used to delete all groceryItems that are connected to the flat id
     @Query("SELECT g FROM groceryItem AS g WHERE flat.id = :flat_id")
