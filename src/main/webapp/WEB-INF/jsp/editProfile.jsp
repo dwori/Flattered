@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
-  User: Lukas
-  Date: 21.05.2021
-  Time: 09:06
+  User: Max
+  Date: 18.06.2021
+  Time: 13:25
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
@@ -19,7 +19,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <bootstrap:bootstrap-metadata/>
-    <title>Register</title>
+    <title>Edit Profile</title>
     <bootstrap:bootstrap-css/>
     <link href="/css/sidebar.css" rel="stylesheet">
 
@@ -31,38 +31,43 @@
 <div class="container" role="main">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <form:form modelAttribute="user" method="post" action="changeUser">
+            <form:form modelAttribute="user" method="post" action="updateUser">
                 <form:hidden path="id" />
                 <fieldset>
-                    <h2>
-                        Register
-                    </h2>
+                    <legend>
+                        Edit Profile
+                    </legend>
 
                     <! ---------------- username ---------------- -->
                     <div class="mb-3">
                         <label for="inputUsername" class="form-label">Username</label>
                         <c:set var="usernameInvalid"><form:errors path="username" cssClass="invalid-feedback"/></c:set>
-                        <form:input path="username" class="form-control ${not empty usernameInvalid ? 'is-invalid' : ''}" id="inputUsername" type="text" name="username" placeholder="Enter username"/>
+                        <form:input path="username" class="form-control ${not empty usernameInvalid ? 'is-invalid' : ''}" id="inputUsername" type="text" name="username"/>
                             ${usernameInvalid}
                     </div>
 
+                    <! ---------------- newPassword ---------------- -->
+                    <div class="mb-3" >
+                        <label for="inputNewPassword" class="form-label">New Password?</label>
+                        <input id="inputNewPassword" name="newPassword" class="form-control" placeholder="Leave blank if you do not want to change your password" type="password" value="${param.newPassword}"/>
+                    </div>
+
+                    <! ---------------- newPasswordAgain ---------------- -->
+                    <div class="mb-3" >
+                        <label for="newPasswordAgain" class="form-label">Confirm new Password</label>
+                        <input id="newPasswordAgain" name="newPasswordAgain" class="form-control" placeholder="Leave blank if you do not want to change your password" type="password" value="${param.newPasswordAgain}"/>
+                    </div>
+
                     <! ---------------- password ---------------- -->
-                    <div class="mb-3">
-                        <label for="inputPassword" class="form-label">Password</label>
+                    <div class="mb-3" >
                         <c:set var="passwordInvalid"><form:errors path="password" cssClass="invalid-feedback"/></c:set>
-                        <form:input path="password" class="form-control ${not empty passwordInvalid ? 'is-invalid' : ''}" id="inputPassword" type="text" name="password" placeholder="Enter password"/>
+                        <form:input path="password" class="form-control ${not empty passwordInvalid ? 'is-invalid' : ''}" id="inputPassword" type="hidden" name="password" />
                             ${passwordInvalid}
                     </div>
 
-                    <! ---------------- passwordAgain ---------------- -->
-                    <div class="mb-3" >
-                        <label for="passwordAgain" class="form-label">Confirm new Password</label>
-                        <input id="passwordAgain" name="passwordAgain" class="form-control" placeholder="Please confirm your password" value="${param.passwordAgain}"/>
-                    </div>
-
                     <div class="mb-3">
-                        <button type="submit" class="btn btn-lg btn-primary btn-block">Sign up</button>
-                        <a href="/login" class="btn btn-lg btn-default btn-block">Cancel</a>
+                        <button type="submit" class="btn btn-lg btn-primary btn-block">Save Changes and Logout</button>
+                        <a href="/dashboard" class="btn btn-lg btn-default btn-block">No Changes</a>
                     </div>
                 </fieldset>
             </form:form>
