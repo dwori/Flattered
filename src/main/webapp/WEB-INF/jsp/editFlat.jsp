@@ -73,7 +73,6 @@
             </form:form>
         </div>
     </div>
-
 </div>
 <%--<bootstrap:bootstrap-js/>--%>
 </body>
