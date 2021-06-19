@@ -51,7 +51,7 @@
                         <! ---------------- checkbox ---------------- -->
                         <p><input type='checkbox' name='remember-me'/> Remember me on this computer.</p>
 
-                        <div>
+                        <div class="mb-3">
                             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
                             <a href="/editUser" class="btn btn-lg btn-primary btn-block">Register</a>
                         </div>

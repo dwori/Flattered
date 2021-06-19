@@ -25,7 +25,7 @@ class LoginController(val userService: UserService) {
     fun editUser(model: Model, @RequestParam(required = false) id: Int?): String{
         if (id != null) {
             val user = userService.getUserById(id)
-            model["user"] = user!!
+            model["user"] = user
         } else {
             val user = userService.createUser()
             model["user"] = user
@@ -48,7 +48,7 @@ class LoginController(val userService: UserService) {
     @RequestMapping("/editProfile", method = [RequestMethod.GET])
     fun editProfile(model: Model, @RequestParam(required = false) id: Int): String{
         val user = userService.getUserById(id)
-        model["user"] = user!!
+        model["user"] = user
         return "editProfile"
     }
 
@@ -58,7 +58,7 @@ class LoginController(val userService: UserService) {
                    @RequestParam(required = false) newPassword: String? = null,
                    @RequestParam(required = false) newPasswordAgain: String? = null): String{
 
-        if (newPassword != null || newPasswordAgain != null){
+        if (newPassword != "" || newPasswordAgain != ""){
             if (newPassword != newPasswordAgain){
                 //TODO ERROR MESSAGE
                 //redirectAttributes.addFlashAttribute("errorMessage","If you want to set a new Password please confirm it.")
@@ -68,10 +68,9 @@ class LoginController(val userService: UserService) {
                 user.password = BCryptPasswordEncoder().encode(newPassword)
                 userService.saveUser(user)
             }
-        } else if (user.username != user.id?.let { userService.getUserById(it) }){
+        } else {
             userService.saveUser(user)
         }
-
         return "login"
     }
 }

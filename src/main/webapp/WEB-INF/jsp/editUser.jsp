@@ -50,14 +50,14 @@
                     <div class="mb-3">
                         <label for="inputPassword" class="form-label">Password</label>
                         <c:set var="passwordInvalid"><form:errors path="password" cssClass="invalid-feedback"/></c:set>
-                        <form:input path="password" class="form-control ${not empty passwordInvalid ? 'is-invalid' : ''}" id="inputPassword" type="text" name="password" placeholder="Enter password"/>
+                        <form:input path="password" class="form-control ${not empty passwordInvalid ? 'is-invalid' : ''}" id="inputPassword" type="password" name="password" placeholder="Enter password"/>
                             ${passwordInvalid}
                     </div>
 
                     <! ---------------- passwordAgain ---------------- -->
                     <div class="mb-3" >
                         <label for="passwordAgain" class="form-label">Confirm new Password</label>
-                        <input id="passwordAgain" name="passwordAgain" class="form-control" placeholder="Please confirm your password" value="${param.passwordAgain}"/>
+                        <input id="passwordAgain" name="passwordAgain" class="form-control" placeholder="Please confirm your password" value="${param.passwordAgain}" type="password"/>
                     </div>
 
                     <div class="mb-3">
