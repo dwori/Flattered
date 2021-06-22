@@ -36,6 +36,16 @@
                     <fieldset>
                         <h2 class="form-signin-heading">Login</h2>
 
+                        <!--  Messages  ----------------------------------------------------------- -->
+
+                        <!--  successful message ----------------------------------------------------------- -->
+                        <c:if test="${not empty message}">
+                            <div class="alert alert-success" role="warning">${message}</div>
+                        </c:if>
+                        <!--  successful message ----------------------------------------------------------- -->
+
+                        <!--  Messages  ----------------------------------------------------------- -->
+
                         <! ---------------- username ---------------- -->
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>

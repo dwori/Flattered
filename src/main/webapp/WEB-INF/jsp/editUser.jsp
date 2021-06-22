@@ -38,6 +38,16 @@
                         Register
                     </h2>
 
+                    <!--  Messages  ----------------------------------------------------------- -->
+
+                    <!--  Error message ----------------------------------------------------------- -->
+                    <c:if test="${not empty errorMessage}">
+                        <div class="alert alert-danger" role="alert">${errorMessage}</div>
+                    </c:if>
+                    <!--  Error message ----------------------------------------------------------- -->
+
+                    <!--  Messages  ----------------------------------------------------------- -->
+
                     <! ---------------- username ---------------- -->
                     <div class="mb-3">
                         <label for="inputUsername" class="form-label">Username</label>

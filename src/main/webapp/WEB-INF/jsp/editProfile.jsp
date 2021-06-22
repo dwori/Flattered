@@ -38,6 +38,21 @@
                         Edit Profile
                     </legend>
 
+                    <!--  Messages  ----------------------------------------------------------- -->
+
+                    <!--  Error message ----------------------------------------------------------- -->
+                    <c:if test="${not empty errorMessage}">
+                        <div class="alert alert-danger" role="alert">${errorMessage}</div>
+                    </c:if>
+                    <!--  Error message ----------------------------------------------------------- -->
+
+                    <!--  Messages  ----------------------------------------------------------- -->
+
+                    <img src="..." class="rounded mx-auto d-block" alt="You can upload your Profile Picture here:">
+                    <div class="input-group mb-3">
+                        <input type="file" class="form-control" id="inputGroupFile01">
+                    </div>
+
                     <! ---------------- username ---------------- -->
                     <div class="mb-3">
                         <label for="inputUsername" class="form-label">Username</label>

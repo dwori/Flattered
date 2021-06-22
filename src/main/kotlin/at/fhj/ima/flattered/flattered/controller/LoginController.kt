@@ -34,14 +34,17 @@ class LoginController(val userService: UserService) {
     }
 
     @RequestMapping("/changeUser", method = [RequestMethod.POST])
-    fun changeUser(@ModelAttribute user: user, @RequestParam(required = false) passwordAgain: String? = null): String {
+    fun changeUser(@ModelAttribute user: user, redirectAttributes: RedirectAttributes, @RequestParam(required = false) passwordAgain: String? = null): String {
         if (user.password != passwordAgain){
-            //TODO ERROR MESSAGE
-            return "editUser"
+            val message = "Please confirm your password!"
+            redirectAttributes.addFlashAttribute("errorMessage", message)
+            return "redirect:/editUser"
         } else{
             user.password = BCryptPasswordEncoder().encode(user.password)
             userService.saveUser(user)
-            return "redirect:/"
+            val message = "Account successfully created"
+            redirectAttributes.addFlashAttribute("message", message)
+            return "redirect:/login"
         }
     }
 
@@ -54,23 +57,26 @@ class LoginController(val userService: UserService) {
 
     @RequestMapping("/updateUser", method = [RequestMethod.POST])
     fun updateUser(@ModelAttribute user: user,
-                   //redirectAttributes: RedirectAttributes,
-                   @RequestParam(required = false) newPassword: String? = null,
-                   @RequestParam(required = false) newPasswordAgain: String? = null): String{
+                   redirectAttributes: RedirectAttributes,
+                   @RequestParam(required = false) newPassword: String,
+                   @RequestParam(required = false) newPasswordAgain: String): String{
 
         if (newPassword != "" || newPasswordAgain != ""){
             if (newPassword != newPasswordAgain){
-                //TODO ERROR MESSAGE
-                //redirectAttributes.addFlashAttribute("errorMessage","If you want to set a new Password please confirm it.")
-                //return "redirect:/editProfile"
-                return "editProfile"
+                val message = "Please confirm your password!"
+                redirectAttributes.addFlashAttribute("errorMessage", message)
+                return "redirect:/editProfile?id=${user.id}"
             } else {
+                val message = "Success, please login with your new credentials"
+                redirectAttributes.addFlashAttribute("message", message)
                 user.password = BCryptPasswordEncoder().encode(newPassword)
                 userService.saveUser(user)
             }
         } else {
+            val message = "Success, please login"
+            redirectAttributes.addFlashAttribute("message", message)
             userService.saveUser(user)
         }
-        return "login"
+        return "redirect:/login"
     }
 }
