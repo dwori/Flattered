@@ -28,9 +28,17 @@
 </head>
 <body>
 <main class="main-content">
-<div class="container" role="main">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+<div class="" role="main"
+     style="display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      position: absolute;
+      width: 100%;
+      top: 0;
+      left: 0;">
+    <div class="">
+        <div class="">
             <form:form modelAttribute="user" method="post" action="changeUser">
                 <form:hidden path="id" />
                 <fieldset>

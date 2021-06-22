@@ -19,11 +19,11 @@ class flat(
     @field:NotNull
     var address: String? = null,
     @ManyToMany
-    var users: MutableSet<user> = mutableSetOf(),
+    var users: MutableSet<User> = mutableSetOf(),
     @Column(updatable = false)
     var secretToken: String = UUID.randomUUID().toString().replace("-", ""),
     @ManyToMany
-    var admins: MutableSet<user> = mutableSetOf(),
+    var admins: MutableSet<User> = mutableSetOf(),
 ): Comparable<flat>, Serializable {
 
     override fun equals(other: Any?): Boolean {

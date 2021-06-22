@@ -1,7 +1,5 @@
 package at.fhj.ima.flattered.flattered.entity
 
-import org.jetbrains.annotations.NotNull
-import java.io.Serializable
 import javax.persistence.*
 
 enum class userRole{
@@ -10,7 +8,7 @@ enum class userRole{
 }
 
 @Entity
-class user(
+class User(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int? = null,
@@ -25,12 +23,12 @@ class user(
     var adminstratedFlats: Set<flat>? = null,
     @ManyToOne
     var currentUserflat: flat? = null
-): Comparable<user>{
+): Comparable<User>{
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
-        other as user
+        other as User
         if (id != other.id) return false
         return true
     }
@@ -39,7 +37,7 @@ class user(
         return id.hashCode()
     }
 
-    override fun compareTo(other: user): Int {
+    override fun compareTo(other: User): Int {
         return compareValues(id, other.id)
     }
 }

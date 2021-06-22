@@ -1,7 +1,6 @@
 package at.fhj.ima.flattered.flattered.controller
 
-import at.fhj.ima.flattered.flattered.entity.groceryItem
-import at.fhj.ima.flattered.flattered.entity.user
+import at.fhj.ima.flattered.flattered.entity.User
 import at.fhj.ima.flattered.flattered.service.UserService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Controller
@@ -78,5 +77,6 @@ class LoginController(val userService: UserService) {
             userService.saveUser(user)
         }
         return "redirect:/login"
+
     }
 }

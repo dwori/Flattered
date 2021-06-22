@@ -90,9 +90,5 @@
             </form:form>
         </div>
     </div>
-
 </div>
-<%--<bootstrap:bootstrap-js/>--%>
-</body>
-</html>
 </layout:sidebar>

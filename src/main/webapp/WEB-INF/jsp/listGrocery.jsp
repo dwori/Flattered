@@ -71,6 +71,15 @@
     <div class="row">
         <div class="col-md-20 col-md-offset-1">
 
+            <form id="searchform">
+                <div class="row">
+                    <div class="col">
+                        <label for="inputSearch" class="form-label">Search</label>
+                        <input id="inputSearch" name="search" class="form-control" value="${param.search}"/>
+                    </div>
+                </div>
+            </form>
+
             <table data-toggle="table" class="table table table-striped">
                 <thead>
                 <tr>
@@ -138,9 +147,6 @@
 
 
 </div>    <!--  End of container -->
-
-<bootstrap:bootstrap-js/>
-
 </body>
 </html>
 

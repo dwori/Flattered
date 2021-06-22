@@ -124,6 +124,7 @@
         document.querySelector('.main-content').style.marginLeft = "0px";
     }
 </script>
+<bootstrap:bootstrap-js/>
 </body>
 </html>
 
