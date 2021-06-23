@@ -44,6 +44,16 @@
                     <fieldset>
                         <h2 class="form-signin-heading">Login</h2>
 
+                        <!--  Messages  ----------------------------------------------------------- -->
+
+                        <!--  successful message ----------------------------------------------------------- -->
+                        <c:if test="${not empty message}">
+                            <div class="alert alert-success" role="warning">${message}</div>
+                        </c:if>
+                        <!--  successful message ----------------------------------------------------------- -->
+
+                        <!--  Messages  ----------------------------------------------------------- -->
+
                         <! ---------------- username ---------------- -->
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
@@ -71,7 +81,7 @@
                         <! ---------------- checkbox ---------------- -->
                         <p><input type='checkbox' name='remember-me'/> Remember me on this computer.</p>
 
-                        <div>
+                        <div class="mb-3">
                             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
                             <a href="/editUser" class="btn btn-lg btn-primary btn-block">Register</a>
                         </div>

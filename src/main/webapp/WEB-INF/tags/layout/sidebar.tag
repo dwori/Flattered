@@ -33,7 +33,7 @@
                         </svg>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="userTask">
-                        <li><a class="dropdown-item" href="/editUser?id=${currentUser.id}">Edit User profile</a></li>
+                        <li><a class="dropdown-item" href="/editProfile?id=${currentUser.id}">Edit User profile</a></li>
                         <li>
                             <form:form method="post" action="/logout">
                                 <button class="dropdown-item" type="submit">Logout</button>
