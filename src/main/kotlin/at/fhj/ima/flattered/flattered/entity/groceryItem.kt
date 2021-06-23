@@ -4,7 +4,7 @@ package at.fhj.ima.flattered.flattered.entity
 import org.jetbrains.annotations.NotNull
 import java.io.Serializable
 import javax.persistence.*
-
+import javax.validation.constraints.Size
 
 
 @Entity
@@ -14,6 +14,7 @@ class groceryItem(
     var id: Int? = null,
     @Column(nullable = false, unique = false)
     @field:NotNull
+    @field:Size(min = 3, max = 240)
     var name: String? = null,
     @field:NotNull
     var done: Boolean = false,
@@ -23,7 +24,9 @@ class groceryItem(
     var requestedBy: String? = null,
     var comment: String? = null,
     @ManyToOne @field:NotNull
-    var flat: flat? = null
+    var flat: flat? = null,
+    @Version
+    var version: Int? = null
 ): Comparable<groceryItem>, Serializable {
 
     override fun equals(other: Any?): Boolean {
