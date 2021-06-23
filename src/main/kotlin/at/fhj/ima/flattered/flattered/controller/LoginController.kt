@@ -49,9 +49,13 @@ class LoginController(val userService: UserService) {
 
     @RequestMapping("/editProfile", method = [RequestMethod.GET])
     fun editProfile(model: Model, @RequestParam(required = false) id: Int): String{
-        val user = userService.getUserById(id)
-        model["user"] = user
-        return "editProfile"
+        val user = userService.findUserById(id)
+
+        if (user == userService.getCurrentUser()){
+            model["user"] = user
+            return "editProfile"
+        }
+        return "/error"
     }
 
     @RequestMapping("/updateUser", method = [RequestMethod.POST])
