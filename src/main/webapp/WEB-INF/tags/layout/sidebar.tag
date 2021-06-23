@@ -29,9 +29,16 @@
                 <div class="dropdown">
                     <button class="btn btn-default dropdown-toggle" type="button" id="userTask" data-bs-toggle="dropdown" aria-expanded="false">
                         ${currentUser.username}
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
-                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                        </svg>
+                            <c:choose>
+                                <c:when test="${currentUser.files[0].id == null}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                    </svg>
+                                </c:when>
+                                <c:otherwise>
+                                    <img src="/file/${currentUser.files[0].id}" alt="mdo" class="rounded-circle" width="20" height="20">
+                                </c:otherwise>
+                            </c:choose>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="userTask">
                         <li><a class="dropdown-item" href="/editProfile?id=${currentUser.id}">Edit User profile</a></li>

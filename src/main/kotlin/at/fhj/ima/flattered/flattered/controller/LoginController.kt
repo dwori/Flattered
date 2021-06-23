@@ -80,6 +80,7 @@ class LoginController(val userService: UserService) {
             redirectAttributes.addFlashAttribute("message", message)
             userService.saveUser(user)
         }
+
         return "redirect:/login"
 
     }

@@ -13,7 +13,6 @@
 <%@taglib prefix="layout" tagdir="/WEB-INF/tags/layout" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="file" tagdir="/WEB-INF/tags/file" %>
-<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html>
 
@@ -35,6 +34,19 @@
                         <div class="alert alert-danger" role="alert">${errorMessage}</div>
                     </c:if>
                     <!--  Error message ----------------------------------------------------------- -->
+
+                    <div class="mb-3">
+                    <c:choose>
+                        <c:when test="${currentUser.files[0].id == null}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                            </svg>
+                        </c:when>
+                        <c:otherwise>
+                            <img src="/file/${currentUser.files[0].id}" alt="mdo" class="rounded-circle" width="128" height="128">
+                        </c:otherwise>
+                    </c:choose>
+                    </div>
 
                     <! ---------------- username ---------------- -->
                     <div class="mb-3">
@@ -69,8 +81,8 @@
                     </div>
 
                     <div class="mb-3">
-                        <button type="submit" class="btn btn-lg btn-primary btn-block">Save Changes and Logout</button>
-                        <a href="/dashboard" class="btn btn-lg btn-default btn-block">No Changes</a>
+                        <button type="submit" class="btn btn-lg btn-success btn-block">Save Changes and Logout</button>
+                        <a href="/dashboard" class="btn btn-lg btn-danger btn-block">No Changes</a>
                     </div>
                 </fieldset>
             </form:form>

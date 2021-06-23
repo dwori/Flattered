@@ -4,7 +4,7 @@
 <%@taglib prefix="layout" tagdir="/WEB-INF/tags/layout" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 
 <c:set var="jsvalue" value="["/>
 <c:forEach var="file" items="${value}" varStatus="status">
