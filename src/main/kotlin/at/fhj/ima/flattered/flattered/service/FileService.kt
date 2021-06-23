@@ -43,6 +43,4 @@ class FileService(val fileRepository: FileRepository) {
     fun delete(id: Int) {
         fileRepository.delete(findById(id))
     }
-
-    fun cleanFiles(args: Array){
 }
