@@ -15,20 +15,8 @@
 <%@taglib prefix="file" tagdir="/WEB-INF/tags/file" %>
 
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <bootstrap:bootstrap-metadata/>
-    <title>Edit Profile</title>
-    <bootstrap:bootstrap-css/>
-    <link href="/css/sidebar.css" rel="stylesheet">
 
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous"/>
-</head>
-<body>
-<main class="main-content">
+<layout:sidebar title="Profile" activePage="editProfile">
 <div class="container" role="main">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -46,13 +34,6 @@
                         <div class="alert alert-danger" role="alert">${errorMessage}</div>
                     </c:if>
                     <!--  Error message ----------------------------------------------------------- -->
-
-                    <!--  Messages  ----------------------------------------------------------- -->
-
-                    <img src="..." class="rounded mx-auto d-block" alt="You can upload your Profile Picture here:">
-                    <div class="input-group mb-3">
-                        <input type="file" class="form-control" id="inputGroupFile01">
-                    </div>
 
                     <! ---------------- username ---------------- -->
                     <div class="mb-3">
@@ -81,10 +62,9 @@
                             ${passwordInvalid}
                     </div>
 
-                    <! ---------------- files ------------------>
                     <div class="mb-3">
-                        <label for="user" class="form-label">Profile Picture</label>
-                        <file:file value="${user.files}" />
+                        <label class="form-label">Edit Profile Picture</label>
+                        <file:file value="${user.files}"  />
                     </div>
 
                     <div class="mb-3">
@@ -97,6 +77,5 @@
     </div>
 </div>
 <%--<bootstrap:bootstrap-js/>--%>
-</body>
-</main>
-</html>
+</layout:sidebar>
+
