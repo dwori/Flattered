@@ -81,28 +81,39 @@ class LoginController(val userService: UserService) {
 
     @RequestMapping("/updateUser", method = [RequestMethod.POST])
     fun updateUser(@ModelAttribute user: User,
+                   bindingResult: BindingResult,
                    redirectAttributes: RedirectAttributes,
                    @RequestParam(required = false) newPassword: String,
                    @RequestParam(required = false) newPasswordAgain: String): String{
 
-        if (newPassword != "" || newPasswordAgain != ""){
-            if (newPassword != newPasswordAgain){
-                val message = "Please confirm your password!"
-                redirectAttributes.addFlashAttribute("errorMessage", message)
-                return "redirect:/editProfile?id=${user.id}"
+        if (bindingResult.hasErrors()){
+            return "editProfile"
+        }
+        try {
+            if (newPassword != "" || newPasswordAgain != ""){
+                if (newPassword != newPasswordAgain){
+                    val message = "Please confirm your password!"
+                    redirectAttributes.addFlashAttribute("errorMessage", message)
+                    return "redirect:/editProfile?id=${user.id}"
+                } else {
+                    user.password = BCryptPasswordEncoder().encode(newPassword)
+                    userService.saveUser(user)
+                    val message = "Success, please login with your new credentials"
+                    redirectAttributes.addFlashAttribute("message", message)
+                }
             } else {
-                val message = "Success, please login with your new credentials"
+                val message = "Success, please login"
                 redirectAttributes.addFlashAttribute("message", message)
-                user.password = BCryptPasswordEncoder().encode(newPassword)
                 userService.saveUser(user)
             }
-        } else {
-            val message = "Success, please login"
-            redirectAttributes.addFlashAttribute("message", message)
-            userService.saveUser(user)
+        } catch (dive: DataIntegrityViolationException) {
+            if (dive.message.orEmpty().contains("constraint [username_UK]")) {
+                bindingResult.rejectValue("username","username.alreadyInUse", "Username already in use.");
+                return "editProfile"
+            } else {
+                throw dive
+            }
         }
-
         return "redirect:/login"
-
     }
 }
