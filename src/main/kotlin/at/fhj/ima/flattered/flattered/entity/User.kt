@@ -22,7 +22,9 @@ class User(
     @ManyToMany(mappedBy = "admins")
     var adminstratedFlats: Set<flat>? = null,
     @ManyToOne
-    var currentUserflat: flat? = null
+    var currentUserflat: flat? = null,
+    @ManyToMany(fetch = FetchType.EAGER)
+    var files: List<File>? = null
 ): Comparable<User>{
 
     override fun equals(other: Any?): Boolean {

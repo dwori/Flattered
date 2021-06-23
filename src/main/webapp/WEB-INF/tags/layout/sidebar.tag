@@ -60,6 +60,8 @@
         <title>${title}</title>
     <bootstrap:bootstrap-css/>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/dropzone.css" />
+
     <link href="/css/sidebar.css" rel="stylesheet">
 </head>
 <body>
@@ -125,6 +127,11 @@
     }
 </script>
 <bootstrap:bootstrap-js/>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/dropzone.js"></script>
+
+<script src="/js/custom-dropzone.js"></script>
+
 </body>
 </html>
 

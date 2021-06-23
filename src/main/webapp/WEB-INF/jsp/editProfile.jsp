@@ -12,6 +12,7 @@
 <%@taglib prefix="bootstrap" tagdir="/WEB-INF/tags/bootstrap" %>
 <%@taglib prefix="layout" tagdir="/WEB-INF/tags/layout" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="file" tagdir="/WEB-INF/tags/file" %>
 
 <!DOCTYPE html>
 <html>
@@ -78,6 +79,12 @@
                         <c:set var="passwordInvalid"><form:errors path="password" cssClass="invalid-feedback"/></c:set>
                         <form:input path="password" class="form-control ${not empty passwordInvalid ? 'is-invalid' : ''}" id="inputPassword" type="hidden" name="password" />
                             ${passwordInvalid}
+                    </div>
+
+                    <! ---------------- files ------------------>
+                    <div class="mb-3">
+                        <label for="user" class="form-label">Profile Picture</label>
+                        <file:file value="${user.files}" />
                     </div>
 
                     <div class="mb-3">
