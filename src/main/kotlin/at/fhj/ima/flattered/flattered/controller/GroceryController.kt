@@ -3,9 +3,11 @@ package at.fhj.ima.flattered.flattered.controller
 import at.fhj.ima.flattered.flattered.entity.groceryItem
 import at.fhj.ima.flattered.flattered.service.GroceryService
 import at.fhj.ima.flattered.flattered.service.UserService
+import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.ui.set
+import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
@@ -31,9 +33,17 @@ class GroceryController(val groceryService: GroceryService, val userService: Use
     }
 
     @RequestMapping("/changeGroceryItem", method = [RequestMethod.POST])
-    fun changeGroceryItem(@ModelAttribute groceryItem: groceryItem): String {
-        groceryService.saveGroceryItem(groceryItem)
-        //go back to the entire list
+    fun changeGroceryItem(@ModelAttribute groceryItem: groceryItem, redirectAttributes: RedirectAttributes): String {
+
+        if (groceryItem.name != ""){
+            groceryService.saveGroceryItem(groceryItem)
+            val message = "Grocery ${groceryItem.name} successfully added to your Grocery List!"
+            redirectAttributes.addFlashAttribute("message", message)
+        } else {
+            val message = "You must name your Grocery!"
+            redirectAttributes.addFlashAttribute("errorMessage", message)
+            return "redirect:/editGroceryItem"
+        }
         return "redirect:/listGrocery"
     }
 

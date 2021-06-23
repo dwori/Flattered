@@ -14,6 +14,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="file" tagdir="/WEB-INF/tags/file" %>
 
+
 <!DOCTYPE html>
 
 <layout:sidebar title="Profile" activePage="editProfile">
@@ -47,6 +48,8 @@
                         </c:otherwise>
                     </c:choose>
                     </div>
+
+                    <!--  Messages  ----------------------------------------------------------- -->
 
                     <! ---------------- username ---------------- -->
                     <div class="mb-3">
