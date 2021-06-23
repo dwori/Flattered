@@ -5,16 +5,19 @@ import at.fhj.ima.flattered.flattered.entity.flat
 import at.fhj.ima.flattered.flattered.service.FlatService
 import at.fhj.ima.flattered.flattered.service.GroceryService
 import at.fhj.ima.flattered.flattered.service.UserService
+import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.security.access.annotation.Secured
 import org.springframework.stereotype.Controller
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.ui.Model
 import org.springframework.ui.set
+import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.servlet.mvc.support.RedirectAttributes
+import javax.validation.Valid
 
 
 @Controller
@@ -32,16 +35,32 @@ class FlatController(val flatService: FlatService,
         } else {
             val newFlat = flatService.createFlat()
             model["flat"] = newFlat
-
         }
         return "/editFlat"
     }
+
     @Secured("ROLE_USER")
     @RequestMapping("/changeFlat", method = [RequestMethod.POST])
-    fun changeFlat(@ModelAttribute flat: FlatFormData): String {
+    fun changeFlat(@ModelAttribute @Valid flat: flat, bindingResult: BindingResult, model: Model): String {
 
-        flatService.saveFlatWithFormData(flat)
-        flatService.switchCurrentFlat(flat.id)
+        if (bindingResult.hasErrors()){
+            return "editFlat"
+        }
+        try {
+            val currentUser = userService.getCurrentUser()
+            flat.users.add(currentUser)
+            flat.admins.add(currentUser)
+            flatService.saveFlat(flat)
+            flatService.switchCurrentFlat(flat.id)
+        } catch (dive: DataIntegrityViolationException) {
+            if (dive.message.orEmpty().contains("constraint [name_UK]")) {
+                bindingResult.rejectValue("name","mame.alreadyInUse", "Name already in use.");
+                return "editFlat"
+            } else {
+                throw dive
+            }
+        }
+
         //go back to the entire list
         return "redirect:/listFlat"
     }
