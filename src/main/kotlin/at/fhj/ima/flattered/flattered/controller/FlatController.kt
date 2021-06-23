@@ -76,7 +76,7 @@ class FlatController(val flatService: FlatService,
             redirectAttributes.addFlashAttribute("errorMessage",message)
         }else{
             //Throws an error if no permission is granted
-            throw Exception("No permission for User: ${currentUser.username}")
+            return "/error"
         }
         return "redirect:/listFlat"
     }
