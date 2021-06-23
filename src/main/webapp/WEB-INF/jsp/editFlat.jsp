@@ -19,6 +19,7 @@
 <div class="container" role="main">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
+                <%--@elvariable id="flat" type="at.fhj.ima.flattered.flattered.entity.flat"--%>
             <form:form modelAttribute="flat" method="post" action="changeFlat">
                 <form:hidden path="id" />
                 <fieldset>
@@ -37,7 +38,7 @@
                     <div class="mb-3">
                         <label for="inputName" class="form-label">Name</label>
                         <c:set var="nameInvalid"><form:errors path="name" cssClass="invalid-feedback"/></c:set>
-                        <form:input path="name" class="form-control ${not empty nameInvalid ? 'is-invalid' : ''}" id="inputName" type="text" name="name"/>
+                        <form:input path="name" class="form-control ${not empty nameInvalid ? 'is-invalid' : ''}" id="inputName" type="text"/>
                             ${nameInvalid}
                     </div>
 
@@ -45,7 +46,7 @@
                     <div class="mb-3">
                         <label for="inputAddress" class="form-label">Address</label>
                         <c:set var="addressInvalid"><form:errors path="address" cssClass="invalid-feedback"/></c:set>
-                        <form:input path="address" class="form-control ${not empty nameInvalid ? 'is-invalid' : ''}" id="inputAddress" type="text" name="address"/>
+                        <form:input path="address" class="form-control ${not empty addressInvalid ? 'is-invalid' : ''}" id="inputAddress" type="text"/>
                             ${addressInvalid}
                     </div>
 
