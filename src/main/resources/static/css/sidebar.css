@@ -44,3 +44,12 @@ button {
 .main-content{
     transition: 0.5s;
 }
+
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+footer{
+    margin-top: auto;
+}

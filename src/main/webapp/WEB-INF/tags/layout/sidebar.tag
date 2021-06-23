@@ -19,14 +19,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <div class="row">
-        <div class="col justify-content-center">
+    <header>
+    <div class="navbar navbar-dark bg-dark shadow-sm">
+        <div class="col Logo"
+        style="margin-left: 8vh">
             <a href="/dashboard"><img src="img/Logo_small.png"></a>
         </div>
-        <div class="col">
+        <div class="col Actions">
             <div class="float-end mx-2 my-2">
                 <div class="dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="userTask" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn dropdown-toggle" type="button" id="userTask" data-bs-toggle="dropdown" aria-expanded="false"
+                    style="color: white;
+                    background-color: transparent;
+                    margin-right: 10vh">
                         ${currentUser.username}
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
                             <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
@@ -44,7 +49,9 @@
             </div>
             <c:if test="${activePage == 'dashboard'}">
                 <div class="dropdown float-end my-2 mx-2">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="switchFlat" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn dropdown-toggle" type="button" id="switchFlat" data-bs-toggle="dropdown" aria-expanded="false"
+                            style="color: white;
+                            background-color: transparent">
                       Switch active Flat
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="switchFlat">
@@ -56,6 +63,7 @@
             </c:if>
         </div>
     </div>
+    </header>
     <bootstrap:bootstrap-metadata/>
         <title>${title}</title>
     <bootstrap:bootstrap-css/>
@@ -106,6 +114,11 @@
     </button>
     <jsp:doBody/>
 </main>
+<footer class="footer py-3 bg-dark shadow-sm"
+style="text-align: right">
+    <a href="/contact" class="btn btn-secondary"
+    style="background-color: transparent; margin-right: 10vh">About us</a>
+</footer>
 <script>
     let openBtn = document.querySelector(".openSideNav");
     openBtn.addEventListener("click", () => {
