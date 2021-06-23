@@ -33,7 +33,7 @@ class LoginController(val userService: UserService) {
     }
 
     @RequestMapping("/changeUser", method = [RequestMethod.POST])
-    fun changeUser(@ModelAttribute user: user, redirectAttributes: RedirectAttributes, @RequestParam(required = false) passwordAgain: String? = null): String {
+    fun changeUser(@ModelAttribute user: User, redirectAttributes: RedirectAttributes, @RequestParam(required = false) passwordAgain: String? = null): String {
         if (user.password != passwordAgain){
             val message = "Please confirm your password!"
             redirectAttributes.addFlashAttribute("errorMessage", message)
@@ -55,7 +55,7 @@ class LoginController(val userService: UserService) {
     }
 
     @RequestMapping("/updateUser", method = [RequestMethod.POST])
-    fun updateUser(@ModelAttribute user: user,
+    fun updateUser(@ModelAttribute user: User,
                    redirectAttributes: RedirectAttributes,
                    @RequestParam(required = false) newPassword: String,
                    @RequestParam(required = false) newPasswordAgain: String): String{
