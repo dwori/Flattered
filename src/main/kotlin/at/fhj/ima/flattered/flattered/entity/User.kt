@@ -1,5 +1,6 @@
 package at.fhj.ima.flattered.flattered.entity
 
+import com.sun.istack.NotNull
 import javax.persistence.*
 
 enum class userRole{
@@ -8,11 +9,15 @@ enum class userRole{
 }
 
 @Entity
+@Table(uniqueConstraints = [UniqueConstraint(name = "username_UK", columnNames = ["username"])])
 class User(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int? = null,
-    @Column(nullable = true, unique = true)
+    //@Column(nullable = true)
+    @Column(nullable = false)
+    @field:NotNull
+    //@field:Size(min = 3, max = 240)
     var username: String? = null,
     var password: String? = null,
     @ManyToMany(mappedBy = "users")

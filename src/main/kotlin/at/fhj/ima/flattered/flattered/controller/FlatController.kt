@@ -50,18 +50,17 @@ class FlatController(val flatService: FlatService,
             val currentUser = userService.getCurrentUser()
             flat.users.add(currentUser)
             flat.admins.add(currentUser)
+
             flatService.saveFlat(flat)
             flatService.switchCurrentFlat(flat.id)
         } catch (dive: DataIntegrityViolationException) {
             if (dive.message.orEmpty().contains("constraint [name_UK]")) {
-                bindingResult.rejectValue("name","mame.alreadyInUse", "Name already in use.");
+                bindingResult.rejectValue("name","name.alreadyInUse", "Name already in use.");
                 return "editFlat"
             } else {
                 throw dive
             }
         }
-
-        //go back to the entire list
         return "redirect:/listFlat"
     }
 
