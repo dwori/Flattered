@@ -7,6 +7,9 @@ import java.util.*
 import javax.persistence.*
 import javax.validation.constraints.Size
 
+/*
+ * This class holds fields for a Flat
+ */
 
 @Entity
 @Table(uniqueConstraints = [UniqueConstraint(name = "name_UK", columnNames = ["name"])])

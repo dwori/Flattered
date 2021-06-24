@@ -8,6 +8,10 @@ import javax.validation.constraints.Size
 import javax.validation.constraints.NotNull
 
 
+/*
+ * This class holds the fields for the groceryItems
+ */
+
 @Entity
 class groceryItem(
     @Id

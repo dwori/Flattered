@@ -11,6 +11,10 @@ enum class userRole{
     ROLE_ADMIN
 }
 
+/*
+ * This class holds the fields for the users
+ */
+
 @Entity
 @Table(uniqueConstraints = [UniqueConstraint(name = "username_UK", columnNames = ["username"])])
 class User(

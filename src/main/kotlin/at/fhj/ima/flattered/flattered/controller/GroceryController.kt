@@ -16,10 +16,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes
 
 
 @Controller
-class GroceryController(val groceryService: GroceryService, val userService: UserService) {
+class GroceryController(val groceryService: GroceryService,
+                        val userService: UserService) {
 
     @RequestMapping("/editGroceryItem", method = [RequestMethod.GET])
     fun editGroceryItem(model: Model, @RequestParam(required = false) id: Int?): String {
+        /*
+        * Checks if the id of the incoming item is null.
+        * If this is true a new item will be created, if not than the item with the responding id is loaded.
+        */
         if (id != null) {
             val groceryItem = groceryService.findById(id)
             model["groceryItem"] = groceryItem
@@ -34,7 +39,10 @@ class GroceryController(val groceryService: GroceryService, val userService: Use
 
     @RequestMapping("/changeGroceryItem", method = [RequestMethod.POST])
     fun changeGroceryItem(@ModelAttribute groceryItem: groceryItem, redirectAttributes: RedirectAttributes): String {
-
+        /*
+         * Saves changes to the repository. In advance a null check for the name and the amount field is executed.
+         * Further messages are set for the case that holds true. After that the Grocery List will be displayed.
+         */
         if (groceryItem.name != "" && groceryItem.amount != null){
             groceryService.saveGroceryItem(groceryItem)
             val message = "Grocery ${groceryItem.name} successfully added to your Grocery List!"
@@ -49,6 +57,10 @@ class GroceryController(val groceryService: GroceryService, val userService: Use
 
     @RequestMapping("/listGrocery", method = [RequestMethod.GET])
     fun listGrocery(model: Model, @RequestParam(required = false) search: String? = null): String{
+        /*
+         * Fills the groceryList model depending on the input of the searchbar or fills in all items.
+         * Only items from the users current flat get displayed.
+         */
         if (search != null) {
             model["groceryList"] = groceryService.findAllSearch(search)
         }else{
@@ -63,6 +75,10 @@ class GroceryController(val groceryService: GroceryService, val userService: Use
 
     @RequestMapping("/deleteGroceryItem", method = [RequestMethod.GET])
     fun deleteGroceryItem(model: Model, @RequestParam id: Int, redirectAttributes: RedirectAttributes): String{
+        /*
+         * An item is required by its id and thehn gets deleted. Additionally a message is set to inform the user, that
+         * the action was successful.
+         */
         val groceryItem = groceryService.findById(id)
         groceryService.deleteGroceryItem(groceryItem)
         val message = "GroceryItem: ${groceryItem.name} has been deleted!"
@@ -72,6 +88,10 @@ class GroceryController(val groceryService: GroceryService, val userService: Use
 
     @RequestMapping("/checkGroceryItem",method = [RequestMethod.GET])
     fun checkGroceryItem(model: Model, @RequestParam id: Int,redirectAttributes: RedirectAttributes): String{
+        /*
+         * Selects a groceryItem by its id and switches its status (done) field.
+         * An additional message is set too, to inform the user to which state he switched to.
+         */
         val groceryItem = groceryService.findById(id)
         if (groceryItem.done){
             groceryItem.done = false

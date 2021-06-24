@@ -28,7 +28,10 @@ class FlatController(val flatService: FlatService,
 
     @RequestMapping("/editFlat", method = [RequestMethod.GET])
     fun editFlat(model: Model, @RequestParam(required = false) id: Int?): String {
-        val currentUser = userService.getCurrentUser()
+        /*
+         * Checks if the id of the incoming flat is null.
+         * If this is true a new flat will be created, if not than the flat with the responding id is loaded.
+         */
         if (id != null) {
             val flat = flatService.getFlat(id)
             model["flat"] = flat
@@ -42,7 +45,10 @@ class FlatController(val flatService: FlatService,
     @Secured("ROLE_USER")
     @RequestMapping("/changeFlat", method = [RequestMethod.POST])
     fun changeFlat(@ModelAttribute @Valid flat: flat, bindingResult: BindingResult, model: Model): String {
-
+        /*
+         * Saves changes to the repository. Tries to save changes, switch the users current flat to the changed one.
+         * It adds the currentUser to the flat's users and assigns him the admin role. After that the flat list is displayed.
+         */
         if (bindingResult.hasErrors()){
             return "editFlat"
         }
@@ -66,6 +72,10 @@ class FlatController(val flatService: FlatService,
 
     @RequestMapping("/listFlat", method = [RequestMethod.GET])
     fun listFlat(model: Model): String{
+        /*
+         * Fills the flatList model with all flats, creates a model for the current user, and a model for the check if
+         * the current user is part of the admins for this flat.
+         */
         val flats = flatService.findAllFlats()
         model["flatList"] = flats
         model["currentUser"] = userService.getCurrentUser()
@@ -76,6 +86,12 @@ class FlatController(val flatService: FlatService,
     @Secured("ROLE_USER")
     @RequestMapping("/deleteFlat", method = [RequestMethod.GET])
     fun deleteFlat(model: Model, @RequestParam id: Int, redirectAttributes: RedirectAttributes): String{
+        /*
+         * Acquires the flat by it's id and deletes it from the repository and database.
+         * Additionally all groceryItems from the flats grocery list get deleted too.
+         * If the deleted flat was the users current flat, the users current flat gets switched to null, in order to
+         * avoid any errors.
+         */
         val flat = flatService.getFlat(id)
         val currentUser = userService.getCurrentUser()
 
@@ -93,23 +109,31 @@ class FlatController(val flatService: FlatService,
             val message = "Flat: ${flat.name} has been deleted!"
             redirectAttributes.addFlashAttribute("errorMessage",message)
         }else{
-            //Throws an error if no permission is granted
+            //Displays the error page if no permission is granted. Should not be possible anyways.
             return "/error"
         }
         return "redirect:/listFlat"
     }
     @RequestMapping("/joinFlat", method = [RequestMethod.GET])
     fun joinFlat(model: Model): String{
+        /*
+         * Is used to lead the user to the joinFlat page
+         */
         model["flat"] = flatService.createFlat()
         return "joinFlat"
-
     }
 
     @RequestMapping("/joinAFlat", method = [RequestMethod.POST])
     fun joinAFlat(@RequestParam token: String, redirectAttributes: RedirectAttributes): String{
+        /*
+         * Finds a flat by its unique secret token and the current user. If a flat is found with the token, the user gets
+         * added to the flats users and a success message is displayed.
+         * If no flat is returned for some reasons, an error message is displayed nad nothing else happens.
+         * After everything the flat list is displayed.
+         */
         val flat = flatService.findFlatByToken(token)
         val currentUser = userService.getCurrentUser()
-        var message = ""
+        var message: String
 
         if (flat != null){
             flat.users.add(currentUser)
@@ -125,8 +149,11 @@ class FlatController(val flatService: FlatService,
     }
     @RequestMapping("/kick", method = [RequestMethod.POST])
     fun kick(flatId: Int, userId: Int): String{
+        /*
+         * Takes a user and a flat by their id and removes the user from the flats users.
+         * To avoid errors the users current flat is always to null.
+         */
         val flat = flatService.getFlat(flatId)
-        val user = userService.getUserById(userId)
         flat.users = flat.users.filterTo(mutableSetOf()){ user -> user.id != userId}
         flatService.saveFlat(flat)
         flatService.switchFlat(null,userId)
