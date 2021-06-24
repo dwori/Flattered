@@ -6,6 +6,10 @@ import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
 
+/*
+ * This class is used to store the profile pictures for the users.
+ */
+
 @Entity
 class File(
         @Id

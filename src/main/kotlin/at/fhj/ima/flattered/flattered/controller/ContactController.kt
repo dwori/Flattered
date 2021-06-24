@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestMethod
 class ContactController {
 
     @RequestMapping("/contact", method = [RequestMethod.GET])
+    /*
+     * Leads the user to the contact page.
+     */
     fun contactUs(): String? {
         return "contact"
     }
