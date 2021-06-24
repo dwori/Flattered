@@ -1,20 +1,22 @@
 package at.fhj.ima.flattered.flattered.entity
 
 
-import org.jetbrains.annotations.NotNull
+import javax.validation.constraints.NotNull
 import java.io.Serializable
 import java.util.*
 import javax.persistence.*
-
+import javax.validation.constraints.Size
 
 
 @Entity
+@Table(uniqueConstraints = [UniqueConstraint(name = "name_UK", columnNames = ["name"])])
 class flat(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Int? = null,
-    @Column(nullable = false, unique = true)
+    val id: Int? = null,
+    @Column(nullable = false)
     @field:NotNull
+    @field:Size(min = 3, max = 240)
     var name: String? = null,
     @field:NotNull
     var address: String? = null,

@@ -12,6 +12,7 @@
 <%@taglib prefix="bootstrap" tagdir="/WEB-INF/tags/bootstrap" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="file" tagdir="/WEB-INF/tags/file" %>
 
 <!DOCTYPE html>
 <html>
@@ -28,9 +29,16 @@
                 <div class="dropdown">
                     <button class="btn btn-default dropdown-toggle" type="button" id="userTask" data-bs-toggle="dropdown" aria-expanded="false">
                         ${currentUser.username}
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
-                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                        </svg>
+                            <c:choose>
+                                <c:when test="${currentUser.files[0].id == null}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                    </svg>
+                                </c:when>
+                                <c:otherwise>
+                                    <img src="/file/${currentUser.files[0].id}" alt="mdo" class="rounded-circle" width="20" height="20">
+                                </c:otherwise>
+                            </c:choose>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="userTask">
                         <li><a class="dropdown-item" href="/editProfile?id=${currentUser.id}">Edit User profile</a></li>
@@ -59,6 +67,8 @@
     <bootstrap:bootstrap-metadata/>
         <title>${title}</title>
     <bootstrap:bootstrap-css/>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/dropzone.css" />
 
     <link href="/css/sidebar.css" rel="stylesheet">
 </head>
@@ -125,6 +135,11 @@
     }
 </script>
 <bootstrap:bootstrap-js/>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/dropzone.js"></script>
+
+<script src="/js/custom-dropzone.js"></script>
+
 </body>
 </html>
 

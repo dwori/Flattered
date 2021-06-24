@@ -1,6 +1,9 @@
 package at.fhj.ima.flattered.flattered.entity
 
+
 import javax.persistence.*
+import javax.validation.constraints.NotEmpty
+import javax.validation.constraints.NotNull
 
 enum class userRole{
     ROLE_USER,
@@ -8,12 +11,15 @@ enum class userRole{
 }
 
 @Entity
+@Table(uniqueConstraints = [UniqueConstraint(name = "username_UK", columnNames = ["username"])])
 class User(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int? = null,
-    @Column(nullable = true, unique = true)
+    @Column(nullable = false)
+    @field:NotNull @NotEmpty
     var username: String? = null,
+    @NotEmpty
     var password: String? = null,
     @ManyToMany(mappedBy = "users")
     var flats: Set<flat>? = null,
@@ -22,7 +28,9 @@ class User(
     @ManyToMany(mappedBy = "admins")
     var adminstratedFlats: Set<flat>? = null,
     @ManyToOne
-    var currentUserflat: flat? = null
+    var currentUserflat: flat? = null,
+    @ManyToMany(fetch = FetchType.EAGER)
+    var files: List<File>? = null
 ): Comparable<User>{
 
     override fun equals(other: Any?): Boolean {

@@ -12,22 +12,12 @@
 <%@taglib prefix="bootstrap" tagdir="/WEB-INF/tags/bootstrap" %>
 <%@taglib prefix="layout" tagdir="/WEB-INF/tags/layout" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="file" tagdir="/WEB-INF/tags/file" %>
+
 
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <bootstrap:bootstrap-metadata/>
-    <title>Edit Profile</title>
-    <bootstrap:bootstrap-css/>
-    <link href="/css/sidebar.css" rel="stylesheet">
 
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous"/>
-</head>
-<body>
-<main class="main-content">
+<layout:sidebar title="Profile" activePage="editProfile">
 <div class="container" role="main">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -46,12 +36,20 @@
                     </c:if>
                     <!--  Error message ----------------------------------------------------------- -->
 
-                    <!--  Messages  ----------------------------------------------------------- -->
-
-                    <img src="..." class="rounded mx-auto d-block" alt="You can upload your Profile Picture here:">
-                    <div class="input-group mb-3">
-                        <input type="file" class="form-control" id="inputGroupFile01">
+                    <div class="mb-3">
+                    <c:choose>
+                        <c:when test="${currentUser.files[0].id == null}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                            </svg>
+                        </c:when>
+                        <c:otherwise>
+                            <img src="/file/${currentUser.files[0].id}" alt="mdo" class="rounded-circle" width="128" height="128">
+                        </c:otherwise>
+                    </c:choose>
                     </div>
+
+                    <!--  Messages  ----------------------------------------------------------- -->
 
                     <! ---------------- username ---------------- -->
                     <div class="mb-3">
@@ -81,8 +79,13 @@
                     </div>
 
                     <div class="mb-3">
-                        <button type="submit" class="btn btn-lg btn-primary btn-block">Save Changes and Logout</button>
-                        <a href="/dashboard" class="btn btn-lg btn-default btn-block">No Changes</a>
+                        <label class="form-label">Edit Profile Picture</label>
+                        <file:file value="${user.files}"  />
+                    </div>
+
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-lg btn-success btn-block">Save Changes and Logout</button>
+                        <a href="/dashboard" class="btn btn-lg btn-danger btn-block">No Changes</a>
                     </div>
                 </fieldset>
             </form:form>
@@ -90,6 +93,5 @@
     </div>
 </div>
 <%--<bootstrap:bootstrap-js/>--%>
-</body>
-</main>
-</html>
+</layout:sidebar>
+

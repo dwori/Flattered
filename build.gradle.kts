@@ -23,17 +23,16 @@ dependencies {
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-	runtimeOnly("mysql:mysql-connector-java")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
-
+	runtimeOnly("mysql:mysql-connector-java")
 	compileOnly("org.apache.tomcat.embed:tomcat-embed-jasper")
 	implementation("javax.servlet:jstl")
 
 	//security
 	implementation("org.springframework.boot:spring-boot-starter-security")
 
-	// spring-security-taglibs
-	//implementation("org.springframework.security:spring-security-taglibs")
+	//spring-security-taglibs
+	implementation("org.springframework.security:spring-security-taglibs")
 }
 
 tasks.withType<KotlinCompile> {
