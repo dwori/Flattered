@@ -114,11 +114,21 @@
     </button>
     <jsp:doBody/>
 </main>
-<footer class="footer py-3 bg-dark shadow-sm"
-style="text-align: right">
-    <a href="/contact" class="btn btn-secondary"
-    style="background-color: transparent; margin-right: 10vh">About us</a>
+
+<footer class="footer py-3 bg-dark shadow-sm" style="text-align: right">
+    <c:choose>
+        <c:when test="${activePage != 'contact'}">
+            <a href="/contact" class="btn btn-secondary"
+               style="background-color: transparent; margin-right: 10vh">About us</a>
+        </c:when>
+        <c:otherwise>
+            <a href="/dashboard" class="btn btn-secondary"
+               style="background-color: transparent; margin-right: 10vh">Back to Flattered</a>
+        </c:otherwise>
+    </c:choose>
+
 </footer>
+
 <script>
     let openBtn = document.querySelector(".openSideNav");
     openBtn.addEventListener("click", () => {

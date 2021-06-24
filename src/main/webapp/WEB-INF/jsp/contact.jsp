@@ -6,8 +6,11 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="layout" tagdir="/WEB-INF/tags/layout" %>
 
 <!DOCTYPE html>
+
+<layout:sidebar title="About us" activePage="contact">
 <html>
 <head>
     <meta charset="UTF-8" />
@@ -21,7 +24,7 @@
     <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous"/>
 
 </head>
-<body style="padding: 0vh">
+<body style="padding: 0vh; background-color: white">
 
 <div class="col" style=" width: fit-content; margin: auto; padding: 4vh">
     <h1>Flattered Team</h1>
@@ -80,10 +83,7 @@
 
         </div>
     </div>
-<footer class="footer py-3 bg-dark shadow-sm" style="text-align: center">
-    <a href="/dashboard" class="btn btn-secondary"
-       style="background-color: transparent">Back to Flattered</a>
-</footer>
         <%--<bootstrap:bootstrap-js/>--%>
 </body>
 </html>
+</layout:sidebar>

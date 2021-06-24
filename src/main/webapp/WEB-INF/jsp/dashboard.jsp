@@ -16,7 +16,9 @@
 <%@taglib prefix = "sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 
 <!-- Refreshes side every 10 seconds-->
+<!--
 <META HTTP-EQUIV="Refresh" CONTENT="30">
+-->
 <!DOCTYPE html>
 
 <layout:sidebar title="Dashboard" activePage="dashboard">
@@ -56,8 +58,9 @@
         <!--  Messages  ----------------------------------------------------------- -->
     </div>
 
+    <div>
     <!-- -------- top row ------- -->
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" style="width: fit-content; margin: auto">
         <div class="card mx-4 my-4 bg-success" style="width: 18rem;">
             <div class="card-header">
                 <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor" class="bi bi-people card-img-top mb-2" viewBox="0 0 16 16">
@@ -141,7 +144,7 @@
     </div>
 
     <!-- -------- 2nd row ------- -->
-        <div class="row justify-content-center">
+        <div class="row justify-content-center" style="width: fit-content; margin: auto">
             <div class="card mx-4 my-4" style="width: 18rem;">
                 <div class="card-header">
                     <h4 class="card-title">Grocery Stats</h4>
@@ -216,4 +219,5 @@
                 </div>
             </div>
         </div>
+    </div>
 </layout:sidebar>
