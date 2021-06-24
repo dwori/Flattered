@@ -19,9 +19,13 @@ class DashboardController(val flatService: FlatService,
 ) {
     @RequestMapping("/dashboard",method = [RequestMethod.GET])
     fun dashboard(model: Model): String{
+        /*
+         * The current user is saved in a model, the groceryList, the users current flat - name and members are modeled too.
+         * The other flats of the current user are saved in a model as well.
+         */
         val actualUser = userService.getCurrentUser()
         model["currentUser"] = actualUser
-        model.set("groceryList", groceryService.findAll())
+        model["groceryList"] = groceryService.findAll()
 
         val flatMember = actualUser.currentUserflat?.id?.let { flatService.getFlatUsers(it) }
         if (flatMember != null) {
@@ -43,11 +47,18 @@ class DashboardController(val flatService: FlatService,
 
     @RequestMapping("/", method = [RequestMethod.GET])
     fun start(): String{
+        /*
+         * Leads the user to the dashboard page after login.
+         */
         return "redirect:/dashboard"
     }
 
     @RequestMapping("/switchCurrentFlat",method = [RequestMethod.GET])
     fun switchCurrentFlat(@RequestParam id: Int, redirectAttributes: RedirectAttributes): String{
+        /*
+         * Takes a flat by it's id and changes the current users current flat to this flat.
+         * Afterwards a message about the actions success is displayed and the dashboard page is displayed.
+         */
         val currentUser = userService.getCurrentUser()
         currentUser.currentUserflat = flatService.getFlat(id)
         userService.saveUser(currentUser)
