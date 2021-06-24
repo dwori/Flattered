@@ -35,7 +35,7 @@ What you need to:
 ## Team Members
 | Name  | GitHub | Responsibilities |
 | ------------- | ------------- | ------------- |
-| <b>CEH</b> Maximilian | [@MaxiKingNr99](https://github.com/MaxiKingNr99) | <b>Flats</b>, Security, Files, Code Reviews |
+| <b>CEH</b> Maximilian | [@W0M34T](https://github.com/W0M34T) | <b>Flats</b>, Security, Files, Code Reviews |
 | <b>DWORACEK</b> Lukas | [@dwori](https://github.com/dwori) | <b>GitHub Repository</b>, <b>Manage pull requests</b>, Grocery Items, Flats, Code Reviews  |
 | <b>GANSTER</b> Peter | [@Giu52](https://github.com/Giu52) | <b>Design</b>, Security, Files, Code Reviews  |
 
