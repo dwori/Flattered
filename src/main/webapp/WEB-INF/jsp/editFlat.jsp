@@ -54,8 +54,23 @@
                     <c:if test="${flat.id != null}">
                         <div class="mb-3">
                             <label for="inputToken" class="form-label">Share this token, go invite your friends!</label>
+                            <div class="input-group" id="token">
                             <input class="form-control" id="inputToken" type="text" readonly="readonly" name="token"
                                    value="<c:out value="${flat.secretToken}"/>">
+                                <div class="input-group-addon">
+                                    <button type="button" style="padding: 1vh; background-color: ghostwhite" onclick="copyToken()">Copy token</button>
+                                    <script>
+                                        function copyToken() {
+                                            var copyText = document.getElementById("inputToken");
+                                            copyText.select();
+                                            copyText.setSelectionRange(0, 99999)
+                                            document.execCommand("copy");
+                                            alert("Copied the token: " + copyText.value + " to your clipboard!");
+                                        }
+                                    </script>
+
+                                </div>
+                        </div>
                         </div>
                     </c:if>
 
