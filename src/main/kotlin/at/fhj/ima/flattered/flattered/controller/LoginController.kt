@@ -25,6 +25,10 @@ class LoginController(val userService: UserService) {
 
     @RequestMapping("/editUser", method = [RequestMethod.GET])
     fun editUser(model: Model, @RequestParam(required = false) id: Int?): String{
+        /*
+        * If there is no id parameter provided, a new user model is created.
+        * If there is an id parameter provided, the corresponding user is found in the repository and returned as a model.
+        * */
         if (id != null) {
             val user = userService.getUserById(id)
             model["user"] = user
@@ -41,12 +45,15 @@ class LoginController(val userService: UserService) {
                    redirectAttributes: RedirectAttributes,
                    @RequestParam(required = false) passwordAgain: String? = null): String {
 
+        /*
+        * Username and password inputs are checked.
+        * If every input is provided successfully, we create a new user in the Repository.
+        * If an input is missing or not provided correctly, we send an corresponding error message and do not create a new User.
+        * */
         val passwd = user.password
         if (bindingResult.hasErrors()){
             return "editUser"
         }
-
-
         try {
             if (user.username == "" || user.password == ""){
                 val message = "Username and Password can't be empty!"
@@ -77,6 +84,9 @@ class LoginController(val userService: UserService) {
 
     @RequestMapping("/editProfile", method = [RequestMethod.GET])
     fun editProfile(model: Model, @RequestParam(required = false) id: Int): String{
+        /*
+        * The corresponding user is found in the repository by its id and returned as a user model.
+        * */
         val user = userService.findUserById(id)
 
         if (user == userService.getCurrentUser()){
@@ -92,7 +102,13 @@ class LoginController(val userService: UserService) {
                    redirectAttributes: RedirectAttributes,
                    @RequestParam(required = false) newPassword: String,
                    @RequestParam(required = false) newPasswordAgain: String): String{
-
+        /*
+        * Username and password inputs are checked.
+        * If the new password input is provided and confirmed, the password is changed.
+        * If no password is given, the password is not changed.
+        * If something goes wrong, an error message is send and no changed are made to the user.
+        * If the username is changed, the change will be saved to the repository.
+        * */
         if (bindingResult.hasErrors()){
             return "editProfile"
         }

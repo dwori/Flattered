@@ -15,7 +15,9 @@ class FileController(val fileService: FileService) {
 
     @RequestMapping("/file/{id}", method = [RequestMethod.GET])
     fun downloadFile(@PathVariable("id") id: Int): ResponseEntity<Any> {
-
+        /*
+        * Download the file.
+        * */
         val file = fileService.findById(id)
         val path = fileService.retrievePath(id)
         val fileSystemResource = FileSystemResource(path)
@@ -28,11 +30,17 @@ class FileController(val fileService: FileService) {
     @RequestMapping("/file", method = [RequestMethod.POST])
     @ResponseBody
     fun uploadFile(@RequestParam("file") file: MultipartFile): File {
+        /*
+        * Get the uploaded MultipartFile and create a File.
+        * */
         return fileService.createFile(file)
     }
 
     @RequestMapping("/file/{id}", method = [RequestMethod.POST])
     fun deleteFile(@PathVariable("id") id: Int, request: HttpServletRequest): String {
+        /*
+        * Gets the File by its id and then deletes it from the Repository.
+        * */
         fileService.delete(id)
         val referer = request.getHeader("Referer")
         return "redirect:$referer"
