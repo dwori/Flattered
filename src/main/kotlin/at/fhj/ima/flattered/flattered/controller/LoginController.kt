@@ -45,7 +45,14 @@ class LoginController(val userService: UserService) {
         if (bindingResult.hasErrors()){
             return "editUser"
         }
+
+
         try {
+            if (user.username == "" || user.password == ""){
+                val message = "Username and Password can't be empty!"
+                redirectAttributes.addFlashAttribute("errorMessage", message)
+                return "redirect:/editUser"
+            }
             if (user.password != passwordAgain){
                 val message = "Please confirm your password!"
                 redirectAttributes.addFlashAttribute("errorMessage", message)

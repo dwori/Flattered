@@ -2,6 +2,7 @@ package at.fhj.ima.flattered.flattered.entity
 
 
 import javax.persistence.*
+import javax.validation.constraints.NotEmpty
 import javax.validation.constraints.NotNull
 
 enum class userRole{
@@ -16,8 +17,9 @@ class User(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int? = null,
     @Column(nullable = false)
-    @field:NotNull
+    @field:NotNull @NotEmpty
     var username: String? = null,
+    @NotEmpty
     var password: String? = null,
     @ManyToMany(mappedBy = "users")
     var flats: Set<flat>? = null,
