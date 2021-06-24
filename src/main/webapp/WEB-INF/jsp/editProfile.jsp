@@ -17,6 +17,12 @@
 
 <!DOCTYPE html>
 
+<head>
+    <link href="/css/sidebar.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous"/>
+</head>
+<body style="padding: 0">
 <layout:sidebar title="Profile" activePage="editProfile">
 <div class="container" role="main">
     <div class="row justify-content-center">
@@ -62,13 +68,55 @@
                     <! ---------------- newPassword ---------------- -->
                     <div class="mb-3" >
                         <label for="inputNewPassword" class="form-label">New Password?</label>
+
+                        <div class="input-group" id="togglePassword1">
                         <input id="inputNewPassword" name="newPassword" class="form-control" placeholder="Leave blank if you do not want to change your password" type="password" value="${param.newPassword}"/>
+                        <div class="input-group-addon" onclick="togglePassword1()">
+                            <script>
+                                function togglePassword1() {
+                                    var pwField = document.getElementById("inputNewPassword");
+                                    if (pwField.type === "password") {
+                                        pwField.type = "text";
+                                    } else {
+                                        pwField.type = "password";
+                                    }
+                                }
+                            </script>
+                            <a><i class="fa fa-eye-slash" aria-hidden="true">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#000000" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                    <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                </svg>
+                            </i></a>
+                        </div>
+                        </div>
+
                     </div>
 
                     <! ---------------- newPasswordAgain ---------------- -->
                     <div class="mb-3" >
                         <label for="newPasswordAgain" class="form-label">Confirm new Password</label>
+                        <div class="input-group" id="togglePassword2">
                         <input id="newPasswordAgain" name="newPasswordAgain" class="form-control" placeholder="Leave blank if you do not want to change your password" type="password" value="${param.newPasswordAgain}"/>
+                        <div class="input-group-addon" onclick="togglePassword2()">
+                            <script>
+                                function togglePassword2() {
+                                    var pwField = document.getElementById("newPasswordAgain");
+                                    if (pwField.type === "password") {
+                                        pwField.type = "text";
+                                    } else {
+                                        pwField.type = "password";
+                                    }
+                                }
+                            </script>
+                            <a><i class="fa fa-eye-slash" aria-hidden="true">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#000000" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                    <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                </svg>
+                            </i></a>
+                        </div>
+                        </div>
                     </div>
 
                     <! ---------------- password ---------------- -->
@@ -92,6 +140,7 @@
         </div>
     </div>
 </div>
+    </body>
 <%--<bootstrap:bootstrap-js/>--%>
 </layout:sidebar>
 

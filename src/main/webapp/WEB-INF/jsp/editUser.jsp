@@ -37,8 +37,8 @@
       width: 100%;
       top: 0;
       left: 0;">
-    <div class="">
-        <div class="">
+    <div style="width: 30vh">
+        <div>
             <%--@elvariable id="user" type="at.fhj.ima.flattered.flattered.entity.User"--%>
             <form:form modelAttribute="user" method="post" action="changeUser">
                 <form:hidden path="id" />
@@ -68,15 +68,56 @@
                     <! ---------------- password ---------------- -->
                     <div class="mb-3">
                         <label for="inputPassword" class="form-label">Password</label>
+                        <div class="input-group" id="togglePassword1">
                         <c:set var="passwordInvalid"><form:errors path="password" cssClass="invalid-feedback"/></c:set>
                         <form:input path="password" class="form-control ${not empty passwordInvalid ? 'is-invalid' : ''}" id="inputPassword" type="password" name="password" placeholder="Enter password"/>
                             ${passwordInvalid}
+                        <div class="input-group-addon" onclick="togglePassword1()">
+                            <script>
+                                function togglePassword1() {
+                                    var pwField = document.getElementById("inputPassword");
+                                    if (pwField.type === "password") {
+                                        pwField.type = "text";
+                                    } else {
+                                        pwField.type = "password";
+                                    }
+                                }
+                            </script>
+                            <a><i class="fa fa-eye-slash" aria-hidden="true">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#000000" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                    <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                </svg>
+                            </i></a>
+                        </div>
+                        </div>
                     </div>
 
                     <! ---------------- passwordAgain ---------------- -->
                     <div class="mb-3" >
                         <label for="passwordAgain" class="form-label">Confirm new Password</label>
+
+                        <div class="input-group" id="togglePassword2">
                         <input id="passwordAgain" name="passwordAgain" class="form-control" placeholder="Please confirm your password" value="${param.passwordAgain}" type="password"/>
+                        <div class="input-group-addon" onclick="togglePassword2()">
+                            <script>
+                                function togglePassword2() {
+                                    var pwField = document.getElementById("passwordAgain");
+                                    if (pwField.type === "password") {
+                                        pwField.type = "text";
+                                    } else {
+                                        pwField.type = "password";
+                                    }
+                                }
+                            </script>
+                            <a><i class="fa fa-eye-slash" aria-hidden="true">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#000000" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                    <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                </svg>
+                            </i></a>
+                        </div>
+                        </div>
                     </div>
 
                     <div class="mb-3">

@@ -38,8 +38,8 @@
          width: 100%;
          top: 0;
          left: 0;">
-        <div class="">
-            <div class="">
+        <div style="width: 30vh">
+            <div>
                 <form:form method="post" action="/login">
                     <fieldset>
                         <h2 class="form-signin-heading">Login</h2>
