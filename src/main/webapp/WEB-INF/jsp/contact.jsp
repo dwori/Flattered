@@ -12,7 +12,7 @@
 <layout:sidebar title="About us" activePage="contact">
 <body style="padding: 0vh; background-color: white">
 
-<div class="col" style=" width: fit-content; margin: auto; padding: 4vh">
+<div class="col" style=" width: fit-content; margin: auto">
     <h1>Flattered Team</h1>
 </div>
     <div class="container" role="main" style="display: flex;
@@ -21,13 +21,12 @@
     height: 100%;
     width: 100%;
     padding-left: 4vh;
-    padding-right: 4vh;
-    padding-bottom: 4vh;">
-        <div class="row">
+    padding-right: 4vh;">
+        <div class="row" style="min-height: 500px">
 
             <div class="col">
                 <div class="card" style="width: auto; background-color: ghostwhite; margin: auto">
-                    <img src="https://avatars.githubusercontent.com/u/73217509?v=4" class="card-img-top" style="width: 30vh">
+                    <img src="https://avatars.githubusercontent.com/u/73217509?v=4" class="card-img-top">
                     <div class="card-body">
                         <h3 class="card-title">Maximilian Ceh</h3>
                         <p class="card-text">FH-JOANNEUM - IMA19</p>
@@ -39,7 +38,7 @@
 
             <div class="col">
                 <div class="card" style="width: auto; background-color: ghostwhite; margin: auto">
-                    <img src="https://avatars.githubusercontent.com/u/73217570?v=4" class="card-img-top" style="width: 30vh;">
+                    <img src="https://avatars.githubusercontent.com/u/73217570?v=4" class="card-img-top">
                     <div class="card-body">
                         <h3 class="card-title">Lukas Dworacek</h3>
                         <p class="card-text">FH-JOANNEUM - IMA19</p>
@@ -51,7 +50,7 @@
 
             <div class="col">
                 <div class="card" style="width: auto; background-color: ghostwhite; margin: auto">
-                    <img src="https://avatars.githubusercontent.com/u/73217510?v=4" class="card-img-top" style="width: 30vh">
+                    <img src="https://avatars.githubusercontent.com/u/73217510?v=4" class="card-img-top">
                     <div class="card-body">
                         <h3 class="card-title">Peter Ganster</h3>
                         <p class="card-text">FH-JOANNEUM - IMA19</p>
