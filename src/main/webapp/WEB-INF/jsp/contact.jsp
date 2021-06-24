@@ -15,7 +15,7 @@
 <div class="col" style=" width: fit-content; margin: auto">
     <h1>Flattered Team</h1>
 </div>
-    <div class="container" role="main" style="display: flex;
+    <div class="col" role="main" style="display: flex;
     align-items: center;
     justify-content: center;
     height: 100%;
