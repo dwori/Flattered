@@ -24,8 +24,9 @@
 </head>
 <body>
 <div class="container" role="main">
-    <div class="page-header">
+    <div class="page-header mb-4">
         <h1>Flat Manager</h1>
+        <h5>Here you can create, edit, delete ,or join flats. Flat members can also be managed here.</h5>
     </div>
     <!--  Messages  ----------------------------------------------------------- -->
 
