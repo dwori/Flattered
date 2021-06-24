@@ -20,6 +20,7 @@ class GroceryController(val groceryService: GroceryService, val userService: Use
 
     @RequestMapping("/editGroceryItem", method = [RequestMethod.GET])
     fun editGroceryItem(model: Model, @RequestParam(required = false) id: Int?): String {
+        //TEst
         if (id != null) {
             val groceryItem = groceryService.findById(id)
             model["groceryItem"] = groceryItem
