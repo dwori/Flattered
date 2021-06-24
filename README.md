@@ -32,8 +32,9 @@ What you need to:
     - MySQL Database Server <b>5.7</b> (Community Edition).
     - MySQL Workbench.
   - Set up the Database
-    - Create a schema named flattered.
+    - Create a schema named *flattered*.
     - Create a user named *flattered* with the password *flattered*.
+    - Give the user flattered all privileges for the flattered schema. 
     - You might need to set the Timezone to your current one.
   - Save the application files and open the project folder in IntelliJ, then run the application.
 * Access the website:
