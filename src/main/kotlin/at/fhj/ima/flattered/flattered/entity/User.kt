@@ -1,7 +1,8 @@
 package at.fhj.ima.flattered.flattered.entity
 
-import com.sun.istack.NotNull
+
 import javax.persistence.*
+import javax.validation.constraints.NotNull
 
 enum class userRole{
     ROLE_USER,
@@ -14,10 +15,8 @@ class User(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int? = null,
-    //@Column(nullable = true)
     @Column(nullable = false)
     @field:NotNull
-    //@field:Size(min = 3, max = 240)
     var username: String? = null,
     var password: String? = null,
     @ManyToMany(mappedBy = "users")

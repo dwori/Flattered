@@ -35,12 +35,12 @@ class GroceryController(val groceryService: GroceryService, val userService: Use
     @RequestMapping("/changeGroceryItem", method = [RequestMethod.POST])
     fun changeGroceryItem(@ModelAttribute groceryItem: groceryItem, redirectAttributes: RedirectAttributes): String {
 
-        if (groceryItem.name != ""){
+        if (groceryItem.name != "" && groceryItem.amount != null){
             groceryService.saveGroceryItem(groceryItem)
             val message = "Grocery ${groceryItem.name} successfully added to your Grocery List!"
             redirectAttributes.addFlashAttribute("message", message)
         } else {
-            val message = "You must name your Grocery!"
+            val message = "You must name your Grocery and set an amount for it!"
             redirectAttributes.addFlashAttribute("errorMessage", message)
             return "redirect:/editGroceryItem"
         }

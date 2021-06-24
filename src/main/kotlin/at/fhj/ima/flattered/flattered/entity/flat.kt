@@ -1,7 +1,7 @@
 package at.fhj.ima.flattered.flattered.entity
 
 
-import org.jetbrains.annotations.NotNull
+import javax.validation.constraints.NotNull
 import java.io.Serializable
 import java.util.*
 import javax.persistence.*
