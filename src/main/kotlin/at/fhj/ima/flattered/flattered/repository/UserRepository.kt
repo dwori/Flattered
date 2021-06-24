@@ -8,4 +8,7 @@ import org.springframework.data.repository.query.Param
 interface userRepository : JpaRepository<User, Int> {
     @Query("FROM User where username = :username")
     fun findByUsername(@Param("username") username: String): User?
+
+    @Query("FROM User where id = :id")
+    fun findUserById(@Param("id") id: Int): User
 }

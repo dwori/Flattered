@@ -37,6 +37,9 @@ class UserService (val userRepository: userRepository,){
     fun getUserById(id: Int): Optional<User> {
         return userRepository.findById(id)
     }
+    fun findUserById(id: Int): User{
+        return userRepository.findUserById(id)
+    }
     //Creates a user in the database
     fun createUser(): User{
         return User()
