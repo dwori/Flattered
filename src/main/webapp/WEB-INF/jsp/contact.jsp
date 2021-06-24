@@ -26,21 +26,20 @@
         <div class="row">
 
             <div class="col">
-                <div class="card" style="width: 18rem; background-color: ghostwhite; margin: auto">
-                    <img src="https://avatars.githubusercontent.com/u/73217509?v=4" class="card-img-top" style="width: 18rem">
+                <div class="card" style="width: auto; background-color: ghostwhite; margin: auto">
+                    <img src="https://avatars.githubusercontent.com/u/73217509?v=4" class="card-img-top" style="width: 30vh">
                     <div class="card-body">
                         <h3 class="card-title">Maximilian Ceh</h3>
                         <p class="card-text">FH-JOANNEUM - IMA19</p>
                         <p class="card-text">maximilian.ceh@edu.fh-joanneum.at</p>
-                        <a href="https://github.com/MaxiKingNr99">Github Profile</a>
+                        <a href="https://github.com/W0M34T">Github Profile</a>
                     </div>
                 </div>
             </div>
 
             <div class="col">
-                <div class="card" style="width: 18rem; background-color: ghostwhite; margin: auto">
-                    <img src="https://avatars.githubusercontent.com/u/73217570?v=4" class="card-img-top"
-                         style="width: 18rem;">
+                <div class="card" style="width: auto; background-color: ghostwhite; margin: auto">
+                    <img src="https://avatars.githubusercontent.com/u/73217570?v=4" class="card-img-top" style="width: 30vh;">
                     <div class="card-body">
                         <h3 class="card-title">Lukas Dworacek</h3>
                         <p class="card-text">FH-JOANNEUM - IMA19</p>
@@ -51,9 +50,8 @@
             </div>
 
             <div class="col">
-                <div class="card" style="width: 18rem; background-color: ghostwhite; margin: auto">
-                    <img src="https://avatars.githubusercontent.com/u/73217510?v=4" class="card-img-top"
-                         style="width: 18rem">
+                <div class="card" style="width: auto; background-color: ghostwhite; margin: auto">
+                    <img src="https://avatars.githubusercontent.com/u/73217510?v=4" class="card-img-top" style="width: 30vh">
                     <div class="card-body">
                         <h3 class="card-title">Peter Ganster</h3>
                         <p class="card-text">FH-JOANNEUM - IMA19</p>
