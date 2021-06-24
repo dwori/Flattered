@@ -39,6 +39,7 @@
       left: 0;">
     <div class="">
         <div class="">
+            <%--@elvariable id="user" type="at.fhj.ima.flattered.flattered.entity.User"--%>
             <form:form modelAttribute="user" method="post" action="changeUser">
                 <form:hidden path="id" />
                 <fieldset>

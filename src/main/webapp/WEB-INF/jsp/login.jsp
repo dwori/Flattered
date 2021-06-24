@@ -64,11 +64,21 @@
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
 
-                            <div class="input-group" id="showHidePassword">
+                            <div class="input-group" id="togglePassword">
                             <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
-                                <div class="input-group-addon">
-                                    <a href=""><i class="fa fa-eye-slash" aria-hidden="true">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                <div class="input-group-addon" onclick="togglePassword()">
+                                    <script>
+                                        function togglePassword() {
+                                            var pwField = document.getElementById("password");
+                                            if (pwField.type === "password") {
+                                                pwField.type = "text";
+                                            } else {
+                                                pwField.type = "password";
+                                            }
+                                        }
+                                    </script>
+                                    <a><i class="fa fa-eye-slash" aria-hidden="true">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#000000" class="bi bi-eye-fill" viewBox="0 0 16 16">
                                             <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
                                             <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
                                         </svg>
@@ -79,7 +89,7 @@
                         </div>
 
                         <! ---------------- checkbox ---------------- -->
-                        <p><input type='checkbox' name='remember-me'/> Remember me on this computer.</p>
+                        <p><input type='checkbox' name='remember-me'/> Remember me on this computer</p>
 
                         <div class="mb-3">
                             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>

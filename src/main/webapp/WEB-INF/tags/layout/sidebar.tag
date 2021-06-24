@@ -20,14 +20,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <div class="row">
-        <div class="col justify-content-center">
+    <header>
+    <div class="navbar navbar-dark bg-dark shadow-sm">
+        <div class="col Logo"
+        style="margin-left: 8vh">
             <a href="/dashboard"><img src="img/Logo_small.png"></a>
         </div>
-        <div class="col">
+        <div class="col Actions">
             <div class="float-end mx-2 my-2">
                 <div class="dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="userTask" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn dropdown-toggle" type="button" id="userTask" data-bs-toggle="dropdown" aria-expanded="false"
+                    style="color: white;
+                    background-color: transparent;
+                    margin-right: 10vh">
                         ${currentUser.username}
                             <c:choose>
                                 <c:when test="${currentUser.files[0].id == null}">
@@ -52,7 +57,9 @@
             </div>
             <c:if test="${activePage == 'dashboard'}">
                 <div class="dropdown float-end my-2 mx-2">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="switchFlat" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn dropdown-toggle" type="button" id="switchFlat" data-bs-toggle="dropdown" aria-expanded="false"
+                            style="color: white;
+                            background-color: transparent">
                       Switch active Flat
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="switchFlat">
@@ -64,6 +71,7 @@
             </c:if>
         </div>
     </div>
+    </header>
     <bootstrap:bootstrap-metadata/>
         <title>${title}</title>
     <bootstrap:bootstrap-css/>
@@ -116,6 +124,21 @@
     </button>
     <jsp:doBody/>
 </main>
+
+<footer class="footer py-3 bg-dark shadow-sm" style="text-align: right">
+    <c:choose>
+        <c:when test="${activePage != 'contact'}">
+            <a href="/contact" class="btn btn-secondary"
+               style="background-color: transparent; margin-right: 10vh">About us</a>
+        </c:when>
+        <c:otherwise>
+            <a href="/dashboard" class="btn btn-secondary"
+               style="background-color: transparent; margin-right: 10vh">Back to Flattered</a>
+        </c:otherwise>
+    </c:choose>
+
+</footer>
+
 <script>
     let openBtn = document.querySelector(".openSideNav");
     openBtn.addEventListener("click", () => {
